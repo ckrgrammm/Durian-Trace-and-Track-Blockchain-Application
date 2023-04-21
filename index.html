@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Nav Example</title>
+  <link href="style.css" rel="stylesheet"/>
+  <style>
+body {
+        font-family: Helvetica, sans-serif;
+      }
+a {
+  color: #ffffff;
+}
+
+/* header */
+.header {
+  background-color: #252525;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  display:block;
+  width: 100%;
+  z-index: 3;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #252525;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid #4b4b4b;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #4b4b4b;
+  color:#eaff63;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+.header .logo:hover{
+    color:#eaff63;
+}
+/* menu */
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="#" class="logo">CSS Nav</a>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <ul class="menu">
+      <li><a href="#work">Our Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#careers">Careers</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </header>
+
+  <div class="contaienr">
+    <div class="switch-container" style="margin-top: 100px;">
+      <div class="land grass"></div>
+      <div class="land small-patch"></div>
+      <div class="land path"></div>
+      <div class="land sand"></div>
+      <div class="land water"></div>
+      <div class="switch">
+        <div class="joycon blue">
+          <div class="minus"></div>
+          <div class="buttons"></div>
+          <div class="joystick"></div>
+          <div class="capture-button"></div>
+        </div>
+        <div class="screen">
+          <div class="grass-triangles">
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+          </div>
+          <div class="grass-triangles">
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+            <div class="grass-triangle"></div>
+          </div>
+          <div class="river">
+            <div class="river-row">
+              <div class="streak"></div>
+              <div class="streak"></div>
+              <div class="streak"></div>
+              <div class="streak"></div>
+              <div class="streak"></div>
+              <div class="streak"></div>
+              <div class="streak"></div>
+            </div>
+            <div class="river-row">
+              <div class="streak"></div>
+              <div class="streak"></div>
+              <div class="streak"></div>
+              <div class="streak"></div>
+              <div class="streak"></div>
+              <div class="streak"></div>
+              <div class="streak"></div>
+            </div>
+            <div class="flow-container">
+              <div class="flow"></div>
+              <div class="flow"></div>
+              <div class="flow"></div>
+              <div class="flow"></div>
+              <div class="flow"></div>
+              <div class="flow"></div>
+              <div class="flow"></div>
+              <div class="flow"></div>
+              <div class="flow"></div>
+            </div>
+          </div>
+          <div class="grass-sand"></div>
+          <div class="blanket"></div>
+        </div>
+        <div class="joycon red">
+          <div class="plus"></div>
+          <div class="buttons"></div>
+          <div class="joystick"></div>
+          <div class="home-button"></div>
+        </div>
+      </div>
+      <div class="joycon-blue-base"></div>
+      <div class="black-base"></div>
+      <div class="joycon-red-base"></div>
+      <div class="switch-base">
+        <div class="joycon-shadow-blue"></div>
+        <div class="screen-shadow"></div>
+        <div class="joycon-shadow-red"></div>
+      </div>
+    </div>
+    <div class="scene-overlay" style="margin-top: 100px;">
+      <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+      </div>
+      <div class="triangles"></div>
+      <div class="house">
+        <div class="roof">
+          <div class="decal"></div>
+        </div>
+        <div class="entrance">
+          <div class="window"></div>
+        </div>
+        <div class="side">
+          <div class="side-window"></div>
+        </div>
+        <div class="roof-top"></div>
+      </div>
+      <div class="right-roof-top"></div>
+      <div class="right-roof-cleanup">
+        <div class="roof-filling"></div>
+      </div>
+      <div class="trees">
+        <div class="tree">
+          <div class="trunk">
+            <div class="roots">
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+            </div>
+          </div>
+          <div class="leaves">
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+          </div>
+          <div class="fruits">
+            <div class="fruit pear"></div>
+            <div class="fruit pear"></div>
+            <div class="fruit pear"></div>
+          </div>
+        </div>
+        <div class="tree">
+          <div class="trunk">
+            <div class="roots">
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+            </div>
+          </div>
+          <div class="leaves cherry-blossoms">
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="tree">
+          <div class="trunk">
+            <div class="roots">
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+            </div>
+          </div>
+          <div class="leaves">
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+          </div>
+          <div class="fruits">
+            <div class="fruit pear"></div>
+            <div class="fruit pear"></div>
+            <div class="fruit pear"></div>
+          </div>
+        </div>
+        <div class="tree">
+          <div class="trunk">
+            <div class="roots">
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+            </div>
+          </div>
+          <div class="leaves cherry-blossoms">
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="tree">
+          <div class="trunk">
+            <div class="roots">
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+            </div>
+          </div>
+          <div class="leaves">
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+          </div>
+          <div class="fruits">
+            <div class="fruit pear"></div>
+            <div class="fruit pear"></div>
+            <div class="fruit pear"></div>
+          </div>
+        </div>
+        <div class="tree">
+          <div class="trunk">
+            <div class="roots">
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+              <div class="root"></div>
+            </div>
+          </div>
+          <div class="leaves cherry-blossoms">
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="cherry-blossom">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flower-field">
+        <div class="flowers">
+          <div class="flower-leaves"></div>
+          <div class="bunch">
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flowers">
+          <div class="flower-leaves"></div>
+          <div class="bunch">
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flowers">
+          <div class="flower-leaves"></div>
+          <div class="bunch">
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flowers">
+          <div class="flower-leaves"></div>
+          <div class="bunch">
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flowers">
+          <div class="flower-leaves"></div>
+          <div class="bunch">
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flowers">
+          <div class="flower-leaves"></div>
+          <div class="bunch">
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flowers">
+          <div class="flower-leaves"></div>
+          <div class="bunch">
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flowers">
+          <div class="flower-leaves"></div>
+          <div class="bunch">
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flowers">
+          <div class="flower-leaves"></div>
+          <div class="bunch">
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flowers">
+          <div class="flower-leaves"></div>
+          <div class="bunch">
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flowers">
+          <div class="flower-leaves"></div>
+          <div class="bunch">
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flowers">
+          <div class="flower-leaves"></div>
+          <div class="bunch">
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+            <div class="flower">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rose-field">
+        <div class="roses">
+          <div class="rose-leaves"></div>
+          <div class="stems"></div>
+          <div class="bunch">
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="roses">
+          <div class="rose-leaves"></div>
+          <div class="stems"></div>
+          <div class="bunch">
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="roses">
+          <div class="rose-leaves"></div>
+          <div class="stems"></div>
+          <div class="bunch">
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="roses">
+          <div class="rose-leaves"></div>
+          <div class="stems"></div>
+          <div class="bunch">
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="roses">
+          <div class="rose-leaves"></div>
+          <div class="stems"></div>
+          <div class="bunch">
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="roses">
+          <div class="rose-leaves"></div>
+          <div class="stems"></div>
+          <div class="bunch">
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="roses">
+          <div class="rose-leaves"></div>
+          <div class="stems"></div>
+          <div class="bunch">
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="roses">
+          <div class="rose-leaves"></div>
+          <div class="stems"></div>
+          <div class="bunch">
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="roses">
+          <div class="rose-leaves"></div>
+          <div class="stems"></div>
+          <div class="bunch">
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="roses">
+          <div class="rose-leaves"></div>
+          <div class="stems"></div>
+          <div class="bunch">
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="roses">
+          <div class="rose-leaves"></div>
+          <div class="stems"></div>
+          <div class="bunch">
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+          </div>
+        </div>
+        <div class="roses">
+          <div class="rose-leaves"></div>
+          <div class="stems"></div>
+          <div class="bunch">
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+            <div class="rose">
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+              <div class="rose-petal"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="isabelle">
+        <div class="legs"></div>
+        <div class="arm right-arm"></div>
+        <div class="dress"></div>
+        <div class="arm left-arm"></div>
+        <div class="head-container">
+          <div class="head">
+            <div class="right-ear"></div>
+            <div class="left-ear"></div>
+            <div class="bangs"></div>
+            <div class="ponytail"></div>
+            <div class="face">
+              <div class="eyes"></div>
+              <div class="closed"></div>
+              <div class="cheeks"></div>
+              <div class="mouth"></div>
+              <div class="nose"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="palm-tree">
+        <div class="palm-trunk"></div>
+        <div class="palm-fruit"></div>
+        <div class="palm-leaves">
+          <div class="palm-leaf">
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+          </div>
+          <div class="palm-leaf">
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+          </div>
+          <div class="palm-leaf">
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+          </div>
+          <div class="palm-leaf">
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+          </div>
+        </div>
+      </div>
+      <div class="palm-tree joycon-tree">
+        <div class="palm-trunk"></div>
+        <div class="palm-fruit"></div>
+        <div class="palm-leaves">
+          <div class="palm-leaf">
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+          </div>
+          <div class="palm-leaf">
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+          </div>
+          <div class="palm-leaf">
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+          </div>
+          <div class="palm-leaf">
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+            <div class="edges"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
