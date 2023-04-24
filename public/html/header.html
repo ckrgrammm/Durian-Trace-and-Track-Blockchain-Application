@@ -19,7 +19,7 @@
         let account;
         
         const getFarmerAddress = async () => {
-          if (account === "0x430a97760ff69773fbff0f45e5383bd74043bcba") {
+          if (account === "0x20cacc2d44c6056a4a8d657cd8bdc05bec7e611b") {
             window.location.href = "/html/Farmer/farmer.html";
             return;
           }
@@ -27,7 +27,7 @@
             try {
               const accounts = await ethereum.request({ method: "eth_requestAccounts" });
               account = accounts[0];
-              if (account === "0x430a97760ff69773fbff0f45e5383bd74043bcba") {
+              if (account === "0x20cacc2d44c6056a4a8d657cd8bdc05bec7e611b") {
                 window.location.href = "/html/Farmer/farmer.html";
               } else {
                 alert("You do not have access to this page.");

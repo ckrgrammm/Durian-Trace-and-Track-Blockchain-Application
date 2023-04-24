@@ -12,6 +12,11 @@ window.addEventListener('load', async function () {
                     "internalType": "uint256",
                     "name": "_price",
                     "type": "uint256"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_category",
+                    "type": "string"
                 }
             ],
             "name": "addProduct",
@@ -66,6 +71,32 @@ window.addEventListener('load', async function () {
             "name": "buyProduct",
             "outputs": [],
             "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                }
+            ],
+            "name": "confirmReceivedFromDistributor",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                }
+            ],
+            "name": "confirmReceivedFromRetailer",
+            "outputs": [],
+            "stateMutability": "nonpayable",
             "type": "function"
         },
         {
@@ -342,6 +373,21 @@ window.addEventListener('load', async function () {
                     "internalType": "uint256",
                     "name": "price",
                     "type": "uint256"
+                },
+                {
+                    "internalType": "string",
+                    "name": "category",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "distributorReceivedDate",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "retailerReceivedDate",
+                    "type": "uint256"
                 }
             ],
             "stateMutability": "view",
@@ -362,7 +408,7 @@ window.addEventListener('load', async function () {
         }
     ];
 
-    const Address = "0x260C4a73B00c7E86a5770c1231e560fA1f2D763b";
+    const Address = "0xd91541Cf3Da608a033fC7F445c482FD776836627";
     window.web3 = await new Web3(window.ethereum); //how to access to smart contract 
     window.contract = await new window.web3.eth.Contract(ABI, Address); //how you create an instance of that contract by using the abi and address  
 });

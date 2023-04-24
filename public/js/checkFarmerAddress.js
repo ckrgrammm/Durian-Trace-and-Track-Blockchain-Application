@@ -11,7 +11,7 @@ async function checkFarmerAddress() {
       account = accounts[0];
       alert(account);
   
-      if (account !== "0x430a97760ff69773fbff0f45e5383bd74043bcba") {
+      if (account !== "0x20cacc2d44c6056a4a8d657cd8bdc05bec7e611b") {
         window.location.href = "/index.html";
         return;
       }
