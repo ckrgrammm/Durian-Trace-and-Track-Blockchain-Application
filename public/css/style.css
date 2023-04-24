@@ -626,7 +626,7 @@ html,body {
 .trees .tree .trunk .roots .root:last-child {
   box-shadow: 1px 1px #d0632d, 0.1em 1px black;
 }
-.trees .tree .leaves, .trees .tree .cherry-blossoms {
+.trees .tree .leaves {
   position: relative;
   width: 60px;
   height: 60px;
@@ -638,7 +638,7 @@ html,body {
   border: 1px solid #3a9c87;
   border: 0.1em solid black;
 }
-.trees .tree .leaves:before, .trees .tree .cherry-blossoms:before, .trees .tree .leaves:after, .trees .tree .cherry-blossoms:after {
+.trees .tree .leaves:before, .trees .tree .leaves:after {
   content: "";
   position: absolute;
   width: 60px;
@@ -652,13 +652,13 @@ html,body {
   border-bottom: 2px solid #91451f;
   box-shadow: inset 4px -10px #41af97;
 }
-.trees .tree .leaves:before, .trees .tree .cherry-blossoms:before {
+.trees .tree .leaves:before {
   left: -20px;
 }
-.trees .tree .leaves:after, .trees .tree .cherry-blossoms:after {
+.trees .tree .leaves:after {
   left: 20px;
 }
-.trees .tree .leaves .leaf, .trees .tree .cherry-blossoms .leaf {
+.trees .tree .leaves .leaf {
   position: absolute;
   width: 10px;
   height: 15px;
@@ -669,7 +669,7 @@ html,body {
   border-right: 1px solid #2c7766;
   transform: scale(0.5);
 }
-.trees .tree .leaves .leaf:before, .trees .tree .cherry-blossoms .leaf:before, .trees .tree .leaves .leaf:after, .trees .tree .cherry-blossoms .leaf:after {
+.trees .tree .leaves .leaf:before, .trees .tree .leaves .leaf:after {
   content: "";
   position: absolute;
   background-color: #4cbda4;
@@ -679,437 +679,258 @@ html,body {
   border-radius: 10% 80%;
   border-right: 1px solid #338a76;
 }
-.trees .tree .leaves .leaf:before, .trees .tree .cherry-blossoms .leaf:before {
+.trees .tree .leaves .leaf:before {
   left: -3px;
   transform: rotate(40deg);
   border-left: 1px solid #338a76;
 }
-.trees .tree .leaves .leaf:after, .trees .tree .cherry-blossoms .leaf:after {
+.trees .tree .leaves .leaf:after {
   left: 4px;
   top: -2px;
   transform: rotate(-40deg);
   border-bottom: 1px solid #338a76;
 }
-.trees .tree .leaves .leaf:nth-child(1), .trees .tree .cherry-blossoms .leaf:nth-child(1) {
+.trees .tree .leaves .leaf:nth-child(1) {
   top: 85px;
   transform: scale(0.8) rotate(-25deg);
 }
-.trees .tree .leaves .leaf:nth-child(2), .trees .tree .cherry-blossoms .leaf:nth-child(2) {
+.trees .tree .leaves .leaf:nth-child(2) {
   top: 80px;
   left: -15px;
 }
-.trees .tree .leaves .leaf:nth-child(3), .trees .tree .cherry-blossoms .leaf:nth-child(3) {
+.trees .tree .leaves .leaf:nth-child(3) {
   top: 85px;
   left: 15px;
   transform: scale(1.1) rotate(-25deg);
 }
-.trees .tree .leaves .leaf:nth-child(4), .trees .tree .cherry-blossoms .leaf:nth-child(4) {
+.trees .tree .leaves .leaf:nth-child(4) {
   top: 80px;
   left: 25px;
   z-index: 3;
 }
-.trees .tree .leaves .leaf:nth-child(5), .trees .tree .cherry-blossoms .leaf:nth-child(5) {
+.trees .tree .leaves .leaf:nth-child(5) {
   top: 85px;
   left: 60px;
   z-index: 2;
   transform: scale(0.9) rotate(70deg);
 }
-.trees .tree .leaves .leaf:nth-child(6), .trees .tree .cherry-blossoms .leaf:nth-child(6) {
+.trees .tree .leaves .leaf:nth-child(6) {
   top: 80px;
   left: 45px;
   z-index: 2;
   transform: scale(1.2) rotate(50deg);
 }
-.trees .tree .leaves .leaf:nth-child(7), .trees .tree .cherry-blossoms .leaf:nth-child(7) {
+.trees .tree .leaves .leaf:nth-child(7){
   top: 72px;
   left: -20px;
 }
-.trees .tree .leaves .leaf:nth-child(8), .trees .tree .cherry-blossoms .leaf:nth-child(8) {
+.trees .tree .leaves .leaf:nth-child(8) {
   top: 75px;
   left: -1px;
   transform: scale(1.02) rotate(-25deg);
 }
-.trees .tree .leaves .leaf:nth-child(9), .trees .tree .cherry-blossoms .leaf:nth-child(9) {
+.trees .tree .leaves .leaf:nth-child(9) {
   top: 70px;
   left: 10px;
 }
-.trees .tree .leaves .leaf:nth-child(10), .trees .tree .cherry-blossoms .leaf:nth-child(10) {
+.trees .tree .leaves .leaf:nth-child(10){
   top: 55px;
   left: -20px;
   transform: scale(1.5) rotate(18deg);
 }
-.trees .tree .leaves .leaf:nth-child(11), .trees .tree .cherry-blossoms .leaf:nth-child(11) {
+.trees .tree .leaves .leaf:nth-child(11) {
   top: 60px;
   transform: scale(0.9);
   left: -5px;
 }
-.trees .tree .leaves .leaf:nth-child(12), .trees .tree .cherry-blossoms .leaf:nth-child(12) {
+.trees .tree .leaves .leaf:nth-child(12) {
   z-index: 2;
   left: 28px;
   top: 60px;
 }
-.trees .tree .leaves .leaf:nth-child(13), .trees .tree .cherry-blossoms .leaf:nth-child(13) {
+.trees .tree .leaves .leaf:nth-child(13) {
   z-index: 2;
   left: 40px;
   top: 70px;
   transform: rotate(40deg);
 }
-.trees .tree .leaves .leaf:nth-child(14), .trees .tree .cherry-blossoms .leaf:nth-child(14) {
+.trees .tree .leaves .leaf:nth-child(14) {
   z-index: 2;
   left: 55px;
   top: 70px;
   transform: rotate(60deg) scale(1.3);
 }
-.trees .tree .leaves .leaf:nth-child(15), .trees .tree .cherry-blossoms .leaf:nth-child(15) {
+.trees .tree .leaves .leaf:nth-child(15){
   z-index: 2;
   left: 25px;
   top: 70px;
   transform: rotate(-20deg) scale(1.1);
 }
-.trees .tree .leaves .leaf:nth-child(16), .trees .tree .cherry-blossoms .leaf:nth-child(16) {
+.trees .tree .leaves .leaf:nth-child(16) {
   z-index: 2;
   left: 70px;
   top: 70px;
   transform: rotate(50deg) scale(0.7);
 }
-.trees .tree .leaves .leaf:nth-child(17), .trees .tree .cherry-blossoms .leaf:nth-child(17) {
+.trees .tree .leaves .leaf:nth-child(17) {
   z-index: 2;
   left: 70px;
   top: 60px;
   transform: scale(0.6) rotate(60deg);
 }
-.trees .tree .leaves .leaf:nth-child(18), .trees .tree .cherry-blossoms .leaf:nth-child(18) {
+.trees .tree .leaves .leaf:nth-child(18) {
   z-index: 2;
   left: 50px;
   top: 60px;
   transform: scale(0.7) rotate(60deg);
 }
-.trees .tree .leaves .leaf:nth-child(19), .trees .tree .cherry-blossoms .leaf:nth-child(19) {
+.trees .tree .leaves .leaf:nth-child(19) {
   z-index: 2;
   left: 65px;
   top: 48px;
   transform: scale(1.5) rotate(50deg);
 }
-.trees .tree .leaves .leaf:nth-child(20), .trees .tree .cherry-blossoms .leaf:nth-child(20) {
+.trees .tree .leaves .leaf:nth-child(20) {
   z-index: 2;
   left: 40px;
   top: 50px;
   transform: scale(0.8) rotate(70deg);
 }
-.trees .tree .leaves .leaf:nth-child(21), .trees .tree .cherry-blossoms .leaf:nth-child(21) {
+.trees .tree .leaves .leaf:nth-child(21) {
   z-index: 2;
   left: 58px;
   top: 35px;
   transform: scale(0.7) rotate(60deg);
 }
-.trees .tree .leaves .leaf:nth-child(22), .trees .tree .cherry-blossoms .leaf:nth-child(22) {
+.trees .tree .leaves .leaf:nth-child(22) {
   z-index: 2;
   left: 20px;
   top: 55px;
   transform: scale(1) rotate(60deg);
 }
-.trees .tree .leaves .leaf:nth-child(23), .trees .tree .cherry-blossoms .leaf:nth-child(23) {
+.trees .tree .leaves .leaf:nth-child(23) {
   z-index: 2;
   left: 40px;
   top: 60px;
   transform: scale(0.4) rotate(60deg);
 }
-.trees .tree .leaves .leaf:nth-child(24), .trees .tree .cherry-blossoms .leaf:nth-child(24) {
+.trees .tree .leaves .leaf:nth-child(24) {
   z-index: 2;
   left: 10px;
   top: 60px;
   transform: scale(0.6) rotate(-10deg);
 }
-.trees .tree .leaves .leaf:nth-child(25), .trees .tree .cherry-blossoms .leaf:nth-child(25) {
+.trees .tree .leaves .leaf:nth-child(25) {
   left: -12px;
   top: 38px;
   transform: scale(1) rotate(60deg);
 }
-.trees .tree .leaves .leaf:nth-child(26), .trees .tree .cherry-blossoms .leaf:nth-child(26) {
+.trees .tree .leaves .leaf:nth-child(26) {
   left: -5px;
   top: 45px;
   transform: scale(0.8) rotate(60deg);
 }
-.trees .tree .leaves .leaf:nth-child(27), .trees .tree .cherry-blossoms .leaf:nth-child(27) {
+.trees .tree .leaves .leaf:nth-child(27) {
   left: 8px;
   top: 52px;
   transform: scale(1) rotate(-10deg);
 }
-.trees .tree .leaves .leaf:nth-child(28), .trees .tree .cherry-blossoms .leaf:nth-child(28) {
+.trees .tree .leaves .leaf:nth-child(28) {
   z-index: 2;
   left: 50px;
   top: 52px;
   transform: scale(1) rotate(-10deg);
 }
-.trees .tree .leaves .leaf:nth-child(29), .trees .tree .cherry-blossoms .leaf:nth-child(29) {
+.trees .tree .leaves .leaf:nth-child(29) {
   left: 48px;
   top: 10px;
   transform: scale(1) rotate(-10deg);
 }
-.trees .tree .leaves .leaf:nth-child(30), .trees .tree .cherry-blossoms .leaf:nth-child(30) {
+.trees .tree .leaves .leaf:nth-child(30) {
   left: 30px;
   top: -5px;
   transform: scale(0.8) rotate(-10deg);
 }
-.trees .tree .leaves .leaf:nth-child(31), .trees .tree .cherry-blossoms .leaf:nth-child(31) {
+.trees .tree .leaves .leaf:nth-child(31) {
   left: 20px;
   top: -5px;
   transform: scale(0.5) rotate(-10deg);
 }
-.trees .tree .leaves .leaf:nth-child(32), .trees .tree .cherry-blossoms .leaf:nth-child(32) {
+.trees .tree .leaves .leaf:nth-child(32){
   left: 40px;
   top: -3px;
   transform: scale(0.5) rotate(-10deg);
 }
-.trees .tree .leaves .leaf:nth-child(33), .trees .tree .cherry-blossoms .leaf:nth-child(33) {
+.trees .tree .leaves .leaf:nth-child(33) {
   left: 10px;
   top: 10px;
   transform: scale(0.7) rotate(-10deg);
 }
-.trees .tree .leaves .leaf:nth-child(34), .trees .tree .cherry-blossoms .leaf:nth-child(34) {
+.trees .tree .leaves .leaf:nth-child(34) {
   left: 0px;
   top: 25px;
   transform: scale(1) rotate(-10deg);
 }
-.trees .tree .leaves .leaf:nth-child(35), .trees .tree .cherry-blossoms .leaf:nth-child(35) {
+.trees .tree .leaves .leaf:nth-child(35){
   left: 20px;
   top: 30px;
   transform: scale(1.2) rotate(0deg);
 }
-.trees .tree .leaves .leaf:nth-child(36), .trees .tree .cherry-blossoms .leaf:nth-child(36) {
+.trees .tree .leaves .leaf:nth-child(36) {
   left: 50px;
   top: 30px;
   transform: scale(1.2) rotate(60deg);
 }
-.trees .tree .leaves .leaf:nth-child(37), .trees .tree .cherry-blossoms .leaf:nth-child(37) {
+.trees .tree .leaves .leaf:nth-child(37) {
   left: 50px;
   top: 30px;
   transform: scale(1.2) rotate(60deg);
 }
-.trees .tree .leaves .leaf:nth-child(38), .trees .tree .cherry-blossoms .leaf:nth-child(38) {
+.trees .tree .leaves .leaf:nth-child(38) {
   left: 50px;
   top: 20px;
   transform: scale(1) rotate(40deg);
 }
-.trees .tree .leaves .leaf:nth-child(39), .trees .tree .cherry-blossoms .leaf:nth-child(39) {
+.trees .tree .leaves .leaf:nth-child(39) {
   left: 40px;
   top: 23px;
   transform: scale(0.8) rotate(50deg);
 }
-.trees .tree .leaves .leaf:nth-child(40), .trees .tree .cherry-blossoms .leaf:nth-child(40) {
+.trees .tree .leaves .leaf:nth-child(40) {
   left: 30px;
   top: 20px;
   transform: scale(0.5) rotate(-20deg);
 }
-.trees .tree .leaves .leaf:nth-child(40), .trees .tree .cherry-blossoms .leaf:nth-child(40) {
+.trees .tree .leaves .leaf:nth-child(40) {
   left: 30px;
   top: 10px;
   transform: scale(1.5) rotate(-20deg);
 }
-.trees .tree .leaves .leaf:nth-child(41), .trees .tree .cherry-blossoms .leaf:nth-child(41) {
+.trees .tree .leaves .leaf:nth-child(41) {
   left: 1px;
   top: 15px;
   transform: scale(0.9) rotate(-5deg);
 }
-.trees .tree .leaves .leaf:nth-child(42), .trees .tree .cherry-blossoms .leaf:nth-child(42) {
+.trees .tree .leaves .leaf:nth-child(42){
   left: 10px;
   top: 18px;
   transform: scale(0.5) rotate(5deg);
 }
-.trees .tree .leaves .leaf:nth-child(44), .trees .tree .cherry-blossoms .leaf:nth-child(44) {
+.trees .tree .leaves .leaf:nth-child(44) {
   left: 5px;
   top: 35px;
   transform: scale(1.5) rotate(-5deg);
 }
-.trees .tree .leaves .leaf:nth-child(45), .trees .tree .cherry-blossoms .leaf:nth-child(45) {
+.trees .tree .leaves .leaf:nth-child(45) {
   z-index: 2;
   left: 38px;
   top: 35px;
   transform: scale(1.8) rotate(70deg);
 }
-.trees .tree .leaves .leaf:nth-child(46), .trees .tree .cherry-blossoms .leaf:nth-child(46) {
+.trees .tree .leaves .leaf:nth-child(46) {
   left: 10px;
   top: 5px;
   transform: scale(1.3) rotate(70deg);
-}
-.trees .tree .cherry-blossoms {
-  background-color: #ffd9df;
-  border: 0.05em solid black;
-  box-shadow: none;
-}
-.trees .tree .cherry-blossoms:before, .trees .tree .cherry-blossoms:after {
-  background-color: #ffd9df;
-  border: 0.05em solid black;
-  border-top: none;
-  box-shadow: none;
-}
-.trees .tree .cherry-blossoms:after {
-  border-left: none;
-}
-.trees .tree .cherry-blossoms .cherry-blossom {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-}
-.trees .tree .cherry-blossoms .cherry-blossom .petal {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: #ffd9df;
-  background-image: linear-gradient(-45deg, #ec87bf 10%, #ffd9df 65%);
-  border-radius: 20% 80%;
-  box-shadow: -0.04em -0.04em #ec87bf, -0.05em -0.05em black;
-}
-.trees .tree .cherry-blossoms .cherry-blossom .petal:nth-child(1) {
-  transform: rotate(40deg);
-  left: 25%;
-  top: 2px;
-}
-.trees .tree .cherry-blossoms .cherry-blossom .petal:nth-child(2) {
-  transform: rotate(-20deg);
-  top: 6px;
-  left: 0px;
-}
-.trees .tree .cherry-blossoms .cherry-blossom .petal:nth-child(3) {
-  transform: rotate(-90deg);
-  top: 12px;
-  left: 2px;
-}
-.trees .tree .cherry-blossoms .cherry-blossom .petal:nth-child(4) {
-  transform: rotate(180deg);
-  top: 12px;
-  left: 10px;
-}
-.trees .tree .cherry-blossoms .cherry-blossom .petal:nth-child(5) {
-  transform: rotate(100deg);
-  top: 5px;
-  left: 10px;
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(1) {
-  z-index: 2;
-  left: 30px;
-  transform: rotate(10deg) scale(0.8);
-  top: 70px;
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(2) {
-  z-index: 2;
-  left: 50px;
-  transform: rotate(20deg) scale(0.4);
-  top: 65px;
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(3) {
-  z-index: 2;
-  left: 45px;
-  top: 75px;
-  transform: scale(0.6);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(4) {
-  z-index: 2;
-  left: 45px;
-  top: 50px;
-  transform: scale(1);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(5) {
-  z-index: 2;
-  left: 58px;
-  top: 70px;
-  transform: scale(0.5);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(6) {
-  z-index: 2;
-  left: 62px;
-  top: 55px;
-  transform: scale(0.5);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(7) {
-  z-index: 2;
-  left: 55px;
-  top: 35px;
-  transform: scale(0.8);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(8) {
-  z-index: 2;
-  left: 30px;
-  top: 55px;
-  transform: scale(0.5);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(9) {
-  z-index: 2;
-  left: 30px;
-  top: 30px;
-  transform: scale(1.1);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(10) {
-  z-index: 2;
-  left: 15px;
-  top: 50px;
-  transform: scale(0.9);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(11) {
-  z-index: 2;
-  left: -7px;
-  top: 40px;
-  transform: scale(1.1);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(12) {
-  left: 6px;
-  top: 60px;
-  transform: scale(0.8);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(13) {
-  left: 10px;
-  top: 75px;
-  transform: scale(0.5);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(14) {
-  left: 0px;
-  top: 75px;
-  transform: scale(0.8);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(15) {
-  left: -15px;
-  top: 65px;
-  transform: scale(0.7);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(16) {
-  left: -22px;
-  top: 55px;
-  transform: scale(0.5);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(17) {
-  left: 5px;
-  top: 18px;
-  transform: scale(1.2) rotate(-40deg);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(18) {
-  left: 30px;
-  top: 10px;
-  transform: scale(1);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(19) {
-  left: 45px;
-  top: 18px;
-  transform: scale(0.5);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(20) {
-  left: 12px;
-  top: 38px;
-  transform: scale(0.5);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(21) {
-  left: 12px;
-  top: 0px;
-  transform: scale(0.7) rotate(60deg);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(22) {
-  left: 25px;
-  top: -2px;
-  transform: scale(0.4) rotate(60deg);
-}
-.trees .tree .cherry-blossoms .cherry-blossom:nth-child(23) {
-  left: -20px;
-  top: 45px;
-  transform: scale(0.4) rotate(60deg);
 }
 .trees .tree .fruits {
   position: absolute;
@@ -2146,118 +1967,6 @@ html,body {
   left: 60px;
 }
 
-.palm-tree, .palm-tree.joycon-tree {
-  position: absolute;
-  width: 100px;
-  height: 200px;
-  left: 460px;
-  top: 290px;
-  transform: scale(0.9);
-}
-.palm-tree:after, .palm-tree.joycon-tree:after {
-  content: "";
-  position: absolute;
-  width: 60px;
-  height: 40px;
-  background-color: rgba(0, 0, 0, 0.1);
-  bottom: 0;
-  z-index: -1;
-  border-radius: 100%;
-  left: 25px;
-  bottom: -10px;
-}
-.palm-tree .palm-trunk {
-  position: absolute;
-  width: 30px;
-  height: 100px;
-  background-color: #df916a;
-  border-radius: 30px;
-  bottom: 0;
-  left: 40%;
-  transform: rotate(-10deg);
-  background: linear-gradient(135deg, #d67240 25%, transparent 25%), linear-gradient(225deg, #d67240 25%, transparent 25%) -50px 0, linear-gradient(315deg, #d67240 25%, transparent 25%) -50px 0, linear-gradient(45deg, #d67240 25%, transparent 25%);
-  background-size: 50px 50px;
-  background-color: #df916a;
-  border: 1px solid black;
-  box-shadow: inset 0px 30px 10px #7c2020;
-}
-.palm-tree .palm-fruit {
-  position: absolute;
-  z-index: 2;
-}
-.palm-tree .palm-fruit:before, .palm-tree .palm-fruit:after {
-  content: "";
-  position: absolute;
-  background-color: #ffea71;
-  width: 30px;
-  height: 30px;
-  border-radius: 100%;
-  border: 1px solid brown;
-  box-shadow: inset 3px -3px goldenrod;
-}
-.palm-tree .palm-fruit:before {
-  left: 40px;
-  top: 90px;
-}
-.palm-tree .palm-fruit:after {
-  top: 95px;
-  left: 20px;
-}
-.palm-tree .palm-leaves {
-  position: absolute;
-}
-.palm-tree .palm-leaves .palm-leaf {
-  position: absolute;
-  width: 90px;
-  height: 40px;
-  background-color: #7abe7a;
-  border-top-left-radius: 90px;
-  border-top-right-radius: 90px;
-  border: 1px solid black;
-  border-bottom: none;
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-}
-.palm-tree .palm-leaves .palm-leaf .edges {
-  flex: 1 1 0;
-  height: 10px;
-  width: 100%;
-  margin-top: 35px;
-  border-radius: 100%;
-  background-color: #7abe7a;
-  border-bottom: 2px solid black;
-}
-.palm-tree .palm-leaves .palm-leaf:nth-child(1) {
-  transform: rotate(-20deg);
-  left: 30px;
-  top: 50px;
-  animation: rotateLeaf1 3s ease infinite;
-}
-.palm-tree .palm-leaves .palm-leaf:nth-child(2) {
-  transform: rotate(20deg);
-  left: -40px;
-  top: 50px;
-  animation: rotateLeaf2 3s ease infinite;
-}
-.palm-tree .palm-leaves .palm-leaf:nth-child(3) {
-  transform: rotate(-30deg);
-  left: -40px;
-  top: 90px;
-  width: 80px;
-  height: 40px;
-  animation: rotateLeaf3 3s ease infinite;
-}
-.palm-tree .palm-leaves .palm-leaf:nth-child(4) {
-  transform: rotate(20deg);
-  left: 40px;
-  top: 75px;
-  width: 80px;
-  height: 40px;
-  border-top: none;
-  animation: rotateLeaf2 3s ease infinite;
-}
-
 @keyframes rotateLeaf1 {
   50% {
     transform: rotate(-25deg);
@@ -2272,23 +1981,6 @@ html,body {
   50% {
     transform: rotate(-35deg);
   }
-}
-.palm-tree.joycon-tree {
-  left: 650px;
-  transform: scaleX(-1);
-  top: 50px;
-}
-.palm-tree.joycon-tree:after {
-  content: "";
-  position: absolute;
-  width: 60px;
-  height: 40px;
-  background-color: rgba(0, 0, 0, 0.3);
-  bottom: 0;
-  z-index: -1;
-  border-radius: 100%;
-  left: 40px;
-  bottom: -10px;
 }
 
 @keyframes toggleOpen {
