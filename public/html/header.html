@@ -12,6 +12,31 @@
           <li><a href="/html/product.html">Product</a></li>
           <li><a href="/html/retailer.html">Retailer</a></li>
           <li><a href="/html/distributor.html">Distributor</a></li>
-          <li><a href="/html/Farmer/farmer.html">Farmer</a></li>
+          <li><a href="#" onclick="if (window.location.pathname.endsWith('/farmer.html')||window.location.pathname.endsWith('/view_product.html')) { window.location.href = '/html/Farmer/farmer.html'; } else { getFarmerAddress(); }">Farmer</a></li>
         </ul>
       </header>
+      <script>
+        let account;
+        
+        const getFarmerAddress = async () => {
+          if (account === "0x430a97760ff69773fbff0f45e5383bd74043bcba") {
+            window.location.href = "/html/Farmer/farmer.html";
+            return;
+          }
+          if (window.ethereum) {
+            try {
+              const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+              account = accounts[0];
+              if (account === "0x430a97760ff69773fbff0f45e5383bd74043bcba") {
+                window.location.href = "/html/Farmer/farmer.html";
+              } else {
+                alert("You do not have access to this page.");
+              }
+            } catch (error) {
+              console.error(error);
+            }
+          }
+          
+        };
+      
+      </script>

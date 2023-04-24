@@ -1,1 +1,24 @@
-retailer
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Durian Tracking</title>
+  <link href="../css/header.css" rel="stylesheet" />
+  <link href="../css/style.css" rel="stylesheet" />
+  <script src="../js/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+</head>
+<body>
+  <script>
+    $(function () {
+      $.get("/html/header.html", function (data) {
+        $("body").prepend(data);
+      });
+    });
+  </script>
+</body>
+
+
+</html>

@@ -10,10 +10,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
 </head>
-<style>
-
-</style>
-
 <body>
   <script>
     $(function () {
@@ -1606,29 +1602,6 @@
     </div>
   </div>
 </body>
-<script>
-  let account;
-  const getFarmerAddress = async () => {
-    if (account === "0x14cafae95d576b8d307b608dd31d029afdaacf47") {
-      window.location.href = "html/Farmer/farmer.html";
-      return;
-    }
 
-    if (window.ethereum !== "undefined") {
-      try {
-        const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-        account = accounts[0];
-        if (account === "0x14cafae95d576b8d307b608dd31d029afdaacf47") {
-          window.location.href = "html/Farmer/farmer.html";
-        } else {
-          alert("You do not have access to this page.");
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-
-</script>
 
 </html>

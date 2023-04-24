@@ -7,111 +7,131 @@
   <link href="../../css/style.css" rel="stylesheet" />
   <link href="../../css/header.css" rel="stylesheet" />
   <script src="../../js/script.js"></script>
+  <script src="../../js/checkFarmerAddress.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
 </head>
 <style>
-    .custom-btn {
-      width: 200px;
-      height: 40px;
-      color: #fff;
-      border-radius: 5px;
-      padding: 10px 25px;
-      font-family: 'Lato', sans-serif;
-      font-weight: 500;
-      font-size: 24px;
-      background: transparent;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      display: inline-block;
-      box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
-        7px 7px 20px 0px rgba(0, 0, 0, .1),
-        4px 4px 5px 0px rgba(0, 0, 0, .1);
-      outline: none;
-    }
+  .custom-btn {
+    width: 200px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+    outline: none;
+  }
 
-    .btn-12 {
-      position: relative;
-      right: 20px;
-      bottom: 20px;
-      border: none;
-      box-shadow: none;
-      width: 200px;
-      height: 40px;
-      line-height: 42px;
-      -webkit-perspective: 230px;
-      perspective: 230px;
-    }
+  .btn-12 {
+    position: relative;
+    right: 20px;
+    bottom: 20px;
+    border: none;
+    box-shadow: none;
+    width: 200px;
+    height: 40px;
+    line-height: 42px;
+    -webkit-perspective: 230px;
+    perspective: 230px;
+  }
 
-    .btn-12 span {
-      background: rgb(0, 172, 238);
-      background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
-      display: block;
-      position: absolute;
-      width: 200px;
-      height: 40px;
-      box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
-        7px 7px 20px 0px rgba(0, 0, 0, .1),
-        4px 4px 5px 0px rgba(0, 0, 0, .1);
-      border-radius: 5px;
-      margin: 0;
-      text-align: center;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      -webkit-transition: all .3s;
-      transition: all .3s;
-    }
+  .btn-12 span {
+    background: rgb(0, 172, 238);
+    background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
+    display: block;
+    position: absolute;
+    width: 200px;
+    height: 40px;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+    border-radius: 5px;
+    margin: 0;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+  }
 
-    .btn-12 span:nth-child(1) {
-      box-shadow:
-        -7px -7px 20px 0px #fff9,
-        -4px -4px 5px 0px #fff9,
-        7px 7px 20px 0px #0002,
-        4px 4px 5px 0px #0001;
-      -webkit-transform: rotateX(90deg);
-      -moz-transform: rotateX(90deg);
-      transform: rotateX(90deg);
-      -webkit-transform-origin: 50% 50% -20px;
-      -moz-transform-origin: 50% 50% -20px;
-      transform-origin: 50% 50% -20px;
-    }
+  .btn-12 span:nth-child(1) {
+    box-shadow:
+      -7px -7px 20px 0px #fff9,
+      -4px -4px 5px 0px #fff9,
+      7px 7px 20px 0px #0002,
+      4px 4px 5px 0px #0001;
+    -webkit-transform: rotateX(90deg);
+    -moz-transform: rotateX(90deg);
+    transform: rotateX(90deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+  }
 
-    .btn-12 span:nth-child(2) {
-      -webkit-transform: rotateX(0deg);
-      -moz-transform: rotateX(0deg);
-      transform: rotateX(0deg);
-      -webkit-transform-origin: 50% 50% -20px;
-      -moz-transform-origin: 50% 50% -20px;
-      transform-origin: 50% 50% -20px;
-    }
+  .btn-12 span:nth-child(2) {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+  }
 
-    .btn-12:hover span:nth-child(1) {
-      box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
-        7px 7px 20px 0px rgba(0, 0, 0, .1),
-        4px 4px 5px 0px rgba(0, 0, 0, .1);
-      -webkit-transform: rotateX(0deg);
-      -moz-transform: rotateX(0deg);
-      transform: rotateX(0deg);
-    }
+  .btn-12:hover span:nth-child(1) {
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+  }
 
-    .btn-12:hover span:nth-child(2) {
-      box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
-        7px 7px 20px 0px rgba(0, 0, 0, .1),
-        4px 4px 5px 0px rgba(0, 0, 0, .1);
-      color: transparent;
-      -webkit-transform: rotateX(-90deg);
-      -moz-transform: rotateX(-90deg);
-      transform: rotateX(-90deg);
-    }
+  .btn-12:hover span:nth-child(2) {
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+    color: transparent;
+    -webkit-transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
+  }
 
-    p {
-      font-size: 20px;
-      text-align: left;
-      color: #000000e0;
-    }
-  </style>
+  .table tr,
+  .table td {
+    width: 350px;
+    text-align: center;
+    height: 50px;
+    min-height: 50px;
+    max-height: 150px;
+  }
+
+  .table {
+    width: 700px;
+    text-align: center;
+  }
+
+  .smallTable {
+    width: 350px;
+  }
+
+  .smallTable tr,
+  .smallTable td {
+    width: 175px;
+    text-align: left;
+  }
+</style>
+
 <body>
   <script>
     $(function () {
@@ -120,82 +140,157 @@
       });
     });
   </script>
-  
+
   <div class="container">
-    <label for="distributor">Distributor:</label>
-    <input type="text" id="distributor" name="distributor"><br>
-    <button class="custom-btn btn-12" onclick="setDistributor()"><span>Click!</span><span>Set
-        Distributor</span></button><br>
+    <table class="table">
+      <tr>
+        <td>
+          <label for="distributor">Distributor:</label>
+          <input type="text" id="distributor" name="distributor"><br>
 
-    <label for="retailer">Retailer:</label>
-    <input type="text" id="retailer" name="retailer"><br>
-    <button class="custom-btn btn-12" onclick="setRetailer()"><span>Click!</span><span>Set Retailer</span></button><br>
+        </td>
+        <td>
+          <label for="retailer">Retailer:</label>
+          <input type="text" id="retailer" name="retailer"><br>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button class="custom-btn btn-12" onclick="setDistributor()"><span>Click!</span><span>Set
+              Distributor</span></button><br>
+        </td>
+        <td>
+          <button class="custom-btn btn-12" onclick="setRetailer()"><span>Click!</span><span>Set
+              Retailer</span></button><br>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="setDistributorMsg" style="max-width: 350px; text-align: center;max-height: 100px;"></div>
+        </td>
+        <td>
+          <div id="setRetailerMsg" style="max-width: 350px; text-align: center;max-height: 100px;"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button class="custom-btn btn-12" onclick="viewProduct()"><span>Click!</span><span>View
+              Product</span></button><br>
+        </td>
+        <td>
+          <table class="smallTable">
+            <tr>
+              <td>
+                <label for="batchNumber">Batch Number:</label>
+              </td>
+              <td>
+                <input type="text" id="batchNumber" name="batchNumber"><br>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="shipToDistributor">Ship To Distributor:</label>
+              </td>
+              <td>
+                <input type="text" id="shipToDistributor" name="shipToDistributor"><br>
+              </td>
+            </tr>
+          </table>
+          <tr>
+            <td>
+            </td>
+            <td>
+              <button class="custom-btn btn-12" onclick="shipToDistributor()"><span>Click!</span><span>Ship to
+                Distributor</span></button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            </td>
+            <td>
+              <div id="shipDistributorMsg" style="max-width: 350px; text-align: center;max-height: 100px;"></div>
+            </td>
+          </tr>
+          
+        </td>
+      </tr>
 
-    <button class="custom-btn btn-12" onclick="viewProduct()"><span>Click!</span><span>View Product</span></button><br>
+    </table>
 
-    <label for="batchNumber">Batch Number:</label>
-    <input type="text" id="batchNumber" name="batchNumber"><br>
-    <label for="shipToDistributor">Ship To Distributor:</label>
-    <input type="text" id="shipToDistributor" name="shipToDistributor"><br>
-    <button class="custom-btn btn-12" onclick="shipToDistributor()"><span>Click!</span><span>Ship to
-        Distributor</span></button>
+
+
+
+
   </div>
 
 </body>
 <script>
-  // const viewProduct = async () => {
-  //           const data = await window.contract.methods.products().call();
-  //     document.getElementById("ownerProduct").innerHTML = `Owner Product information:<br> Product Name: ${data[0]},<br> Price(wei): ${data[1]} <br>Owner Address: ${data[2]}`;
-  //           document.getElementById("dataArea0").innerHTML = data[0];
-  //           document.getElementById("dataArea1").innerHTML = data[1];
-  //           document.getElementById("dataArea2").innerHTML = data[2];
-  //       }
-
   //check the account if own by farmer
   let account;
   window.addEventListener('load', async function () {
-
-    if (typeof window.ethereum === "undefined") {
-      console.error("Metamask not detected");
-      return;
-    }
-
-    try {
-      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-      account = accounts[0];
-      alert(account);
-
-      if (account !== "0x14cafae95d576b8d307b608dd31d029afdaacf47") {
-        window.location.href = "html/farmer.html";
-        return;
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    account = await checkFarmerAddress();
   });
 
   const setDistributor = async () => {
     const Distributor = document.getElementById("distributor").value;
-    await window.contract.methods.setDistributor(Distributor).send({ from: account });
-    document.getElementById("distributor").value = "";
+    try {
+      await window.contract.methods.setDistributor(Distributor).send({ from: account });
+      document.getElementById("distributor").value = "";
+      // Set the success message to green
+      document.getElementById("setDistributorMsg").innerHTML = "The distributor address has been set successfully.";
+      document.getElementById("setDistributorMsg").style.color = "green";
+    } catch (error) {
+      // Catch the error message if the distributor address is invalid
+      document.getElementById("setDistributorMsg").innerHTML = error.message;
+      // Set the error message to red
+      document.getElementById("setDistributorMsg").style.color = "red";
+    }
+
   }
+
   const setRetailer = async () => {
     const Retailer = document.getElementById("retailer").value;
-    await window.contract.methods.setRetailer(Retailer).send({ from: account });
-    document.getElementById("retailer").value = "";
+    try {
+      await window.contract.methods.setRetailer(Retailer).send({ from: account });
+      document.getElementById("retailer").value = "";
+      // Set the success message to green
+      document.getElementById("setRetailerMsg").innerHTML = "The retailer address has been set successfully.";
+      document.getElementById("setRetailerMsg").style.color = "green";
+    } catch (error) {
+      // Catch the error message if the retailer address is invalid
+      document.getElementById("setRetailerMsg").innerHTML = error.message;
+      // Set the error message to red
+      document.getElementById("setRetailerMsg").style.color = "red";
+    }
+
   }
 
   const viewProduct = async () => {
     window.location.href = "view_product.html";
   }
 
+
+
   const shipToDistributor = async () => {
-    const shipToDistributor = document.getElementById("shipToDistributor").value;
-    const batchNumber = document.getElementById("batchNumber").value;
-    await window.contract.methods.shipToDistributor(batchNumber,shipToDistributor).send({ from: account });
+  const shipToDistributor = document.getElementById("shipToDistributor").value;
+  const batchNumber = document.getElementById("batchNumber").value;
+
+  try {
+    await window.contract.methods.shipToDistributor(batchNumber, shipToDistributor).send({ from: account });
     document.getElementById("shipToDistributor").value = "";
     document.getElementById("batchNumber").value = "";
+
+    // Set the success message to green
+    document.getElementById("shipDistributorMsg").innerHTML = "The product has been shipped to the distributor successfully.";
+    document.getElementById("shipDistributorMsg").style.color = "green";
+  } catch (error) {
+    // Catch the error message if the shipToDistributor call fails
+    document.getElementById("shipDistributorMsg").innerHTML = error.message;
+    // Set the error message to red
+    document.getElementById("shipDistributorMsg").style.color = "red";
   }
+}
+
 
 </script>
 

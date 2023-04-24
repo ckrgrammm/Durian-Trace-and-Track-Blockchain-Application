@@ -6,6 +6,7 @@
   <title>Durian Tracking</title>
   <link href="../../css/header.css" rel="stylesheet" />
   <script src="../../js/script.js"></script>
+  <script src="../../js/checkFarmerAddress.js"></script>
   <link rel="import" href="header.html">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
@@ -292,25 +293,7 @@
   //check the account if own by farmer
   let account;
   window.addEventListener('load', async function () {
-
-    if (typeof window.ethereum === "undefined") {
-      console.error("Metamask not detected");
-      return;
-    }
-
-    try {
-      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-      account = accounts[0];
-      alert(account);
-
-      if (account !== "0x14cafae95d576b8d307b608dd31d029afdaacf47") {
-        window.location.href = "../../index.html";
-        return;
-      }
-    } catch (error) {
-      console.error(error);
-    }
-
+   account = await checkFarmerAddress();
   });
 
 </script>
