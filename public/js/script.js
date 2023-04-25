@@ -105,6 +105,24 @@ window.addEventListener('load', async function () {
             "type": "function"
         },
         {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_comment",
+                    "type": "string"
+                }
+            ],
+            "name": "leaveComment",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
             "inputs": [],
             "stateMutability": "nonpayable",
             "type": "constructor"
@@ -139,24 +157,6 @@ window.addEventListener('load', async function () {
             ],
             "name": "CommentSubmitted",
             "type": "event"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_comment",
-                    "type": "string"
-                }
-            ],
-            "name": "leaveComment",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
         },
         {
             "anonymous": false,
@@ -329,6 +329,19 @@ window.addEventListener('load', async function () {
             "type": "function"
         },
         {
+            "inputs": [],
+            "name": "getAllProduct",
+            "outputs": [
+                {
+                    "internalType": "string[]",
+                    "name": "",
+                    "type": "string[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
             "inputs": [
                 {
                     "internalType": "string",
@@ -342,6 +355,25 @@ window.addEventListener('load', async function () {
                     "internalType": "address",
                     "name": "",
                     "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "name": "productAll",
+            "outputs": [
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
                 }
             ],
             "stateMutability": "view",
@@ -436,7 +468,7 @@ window.addEventListener('load', async function () {
         }
     ];
 
-    const Address = "0x0204DB0e9631A73B000C47Bd325BeD7385b04265";
+    const Address = "0xa0E00111cc02cb0B2DAa598B82d80986Bc4ae4DE";
     window.web3 = await new Web3(window.ethereum); //how to access to smart contract 
     window.contract = await new window.web3.eth.Contract(ABI, Address); //how you create an instance of that contract by using the abi and address  
 });

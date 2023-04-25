@@ -883,8 +883,8 @@
 </body>
 <script>
   function appendTrees(numTrees, numFruits) {
-    if(numTrees > 6){
-      numTrees=6;
+    if (numTrees > 6) {
+      numTrees = 6;
     }
     for (let i = 0; i < numTrees; i++) {
       // create the tree element
@@ -931,11 +931,11 @@
       fruits.classList.add('fruits');
 
       // create the fruit elements
-      if(numFruits[i]>3){
-        numFruits[i]=3;
+      if (numFruits[i] > 3) {
+        numFruits[i] = 3;
       }
       const numCurrentFruits = numFruits[i] || 0;
-      
+
       for (let l = 0; l < numCurrentFruits; l++) {
         const fruit = document.createElement('div');
         fruit.classList.add('fruit', 'pear');
@@ -953,10 +953,38 @@
     }
   }
 
+  window.addEventListener('load', async function () {
+  const products = await contract.methods.getAllProduct().call();
+  const productListString = products.join(', ');
+  const productsArray = productListString.split(', ');
 
-  appendTrees(7, [33, 4, 2, 1, 0,2]);
+  const treePromises = productsArray.map(async (batchNumber) => {
+    const product = await contract.methods.products(batchNumber).call();
+    const tree = product.tree;
+    if (batchNumber !== "" && tree !== "") {
+      // Split the tree string by commas and convert the resulting array of strings to an array of numbers
+      return tree.split(",").map(Number);
+    }
+  });
 
-  
+  const trees = await Promise.all(treePromises).then((treeArrays) => treeArrays.filter(Boolean));
+  const treeCounts = trees.reduce((counts, tree) => {
+    const treeId = tree.join(); // convert the tree array to a string for use as an object key
+    if (counts[treeId]) {
+      counts[treeId] += tree.length; // increment the count if the tree already exists in the object
+    } else {
+      counts[treeId] = tree.length; // add the tree to the object if it doesn't exist yet
+    }
+    return counts;
+  }, {});
+  const numberOfTreeBatchesArray = Object.values(treeCounts);
+  appendTrees(Object.keys(treeCounts).length, numberOfTreeBatchesArray);
+});
+
+
+
+
+
 
 
 </script>

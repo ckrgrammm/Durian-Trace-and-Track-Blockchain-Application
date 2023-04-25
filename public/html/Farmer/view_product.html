@@ -72,6 +72,7 @@
   table.table tr td {
     border-color: #e9e9e9;
     width: 100px;
+    word-wrap: break-word;
   }
 
   table.table th i {
@@ -312,6 +313,11 @@
       const batchNumberValue = product.batchNumber;
       const dateValue = product.date;
       const priceValue = product.price;
+      const category = product.category;
+      const distReceiveDate = product.distributorReceivedDate;
+      const retailerReceiveDate = product.retailerReceivedDate;
+      const comment = product.comment;
+      const tree = product.tree;
 
       const newRow = document.createElement('tr');
       newRow.innerHTML = `
@@ -322,6 +328,11 @@
         <td>${batchNumberValue}</td>
         <td>${dateValue}</td>
         <td>${priceValue}</td>
+        <td>${category}</td>
+        <td>${distReceiveDate}</td>
+        <td>${retailerReceiveDate}</td>
+        <td>${comment}</td>
+        <td>${tree}</td>
         <td>
           <a class="add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
           <a class="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
@@ -330,7 +341,9 @@
         </td>
       `;
 
-      productTableBody.appendChild(newRow);
+        if(batchNumber!=""){
+        productTableBody.appendChild(newRow);
+        }
     });
   });
 </script>
