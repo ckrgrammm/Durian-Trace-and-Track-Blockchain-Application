@@ -883,6 +883,9 @@
 </body>
 <script>
   function appendTrees(numTrees, numFruits) {
+    if(numTrees > 6){
+      numTrees=6;
+    }
     for (let i = 0; i < numTrees; i++) {
       // create the tree element
       const tree = document.createElement('div');
@@ -928,7 +931,11 @@
       fruits.classList.add('fruits');
 
       // create the fruit elements
+      if(numFruits[i]>3){
+        numFruits[i]=3;
+      }
       const numCurrentFruits = numFruits[i] || 0;
+      
       for (let l = 0; l < numCurrentFruits; l++) {
         const fruit = document.createElement('div');
         fruit.classList.add('fruit', 'pear');
@@ -947,7 +954,9 @@
   }
 
 
-  appendTrees(6, [3, 1, 0, 0, 0,2]); // append 5 trees, with 3 fruits on the first tree and 1 fruit on the second tree
+  appendTrees(7, [33, 4, 2, 1, 0,2]);
+
+  
 
 
 </script>

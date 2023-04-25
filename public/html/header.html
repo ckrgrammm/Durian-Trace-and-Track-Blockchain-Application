@@ -1,42 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-  </head>
-  <body>
-    <header id="header">
-        <a href="/index.html" class="logo">Durian</a>
-        <input class="menu-btn" type="checkbox" id="menu-btn" />
-        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-        <ul class="menu">
-          <li><a href="/html/product.html">Product</a></li>
-          <li><a href="/html/retailer.html">Retailer</a></li>
-          <li><a href="/html/distributor.html">Distributor</a></li>
-          <li><a href="#" onclick="if (window.location.pathname.endsWith('/farmer.html')||window.location.pathname.endsWith('/view_product.html')) { window.location.href = '/html/Farmer/farmer.html'; } else { getFarmerAddress(); }">Farmer</a></li>
-        </ul>
-      </header>
-      <script>
-        let account;
-        
-        const getFarmerAddress = async () => {
-          if (account === "0x430a97760ff69773fbff0f45e5383bd74043bcba") {
-            window.location.href = "/html/Farmer/farmer.html";
-            return;
-          }
-          if (window.ethereum) {
-            try {
-              const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-              account = accounts[0];
-              if (account === "0x430a97760ff69773fbff0f45e5383bd74043bcba") {
-                window.location.href = "/html/Farmer/farmer.html";
-              } else {
-                alert("You do not have access to this page.");
-              }
-            } catch (error) {
-              console.error(error);
-            }
-          }
-          
-        };
-      
-      </script>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <header id="header">
+    <a href="/index.html" class="logo">Durian</a>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <ul class="menu">
+      <li><a href="/html/product.html">Product</a></li>
+      <li><a href="/html/retailer.html">Retailer</a></li>
+      <li><a href="/html/distributor.html">Distributor</a></li>
+      <li><a href="/html/farmer/farmer.html">Farmer</a></li>
+      <!-- <li><a href="javascript:getRetailerAddress()">Retailer</a></li>
+      <li><a href="javascript:getDistributorAddress()">Distributor</a></li>
+      <li><a href="javascript:getFarmerAddress()">Farmer</a></li> -->
+    </ul>
+  </header>
+</body>
+
+</html>

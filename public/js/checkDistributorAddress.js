@@ -1,4 +1,4 @@
-async function checkFarmerAddress() {
+async function checkDistributorAddress() {
     let account;
   
     if (typeof window.ethereum === "undefined") {
@@ -9,10 +9,9 @@ async function checkFarmerAddress() {
     try {
       const accounts = await ethereum.request({ method: "eth_requestAccounts" });
       account = accounts[0];
-      
+      const distributorAccount = await contract.methods.distributor().call();
       const farmerAccount = await contract.methods.farmer().call();
-
-      if (account !== farmerAccount.toLowerCase()) {
+      if (account !== distributorAccount.toLowerCase()||distributorAccount.toLowerCase()===farmerAccount.toLowerCase()) {
         alert("You cannot access this page!");
         window.location.href = "/index.html";
         return;

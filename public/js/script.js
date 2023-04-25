@@ -69,6 +69,19 @@ window.addEventListener('load', async function () {
             "type": "function"
         },
         {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_distributor",
+                    "type": "address"
+                }
+            ],
+            "name": "setDistributor",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
             "inputs": [],
             "stateMutability": "nonpayable",
             "type": "constructor"
@@ -116,19 +129,6 @@ window.addEventListener('load', async function () {
             ],
             "name": "ProductShipped",
             "type": "event"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "address",
-                    "name": "_distributor",
-                    "type": "address"
-                }
-            ],
-            "name": "setDistributor",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
         },
         {
             "inputs": [
@@ -280,6 +280,19 @@ window.addEventListener('load', async function () {
             "type": "function"
         },
         {
+            "inputs": [],
+            "name": "getAllProduct",
+            "outputs": [
+                {
+                    "internalType": "string[]",
+                    "name": "",
+                    "type": "string[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
             "inputs": [
                 {
                     "internalType": "string",
@@ -293,6 +306,25 @@ window.addEventListener('load', async function () {
                     "internalType": "address",
                     "name": "",
                     "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "name": "productAll",
+            "outputs": [
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
                 }
             ],
             "stateMutability": "view",
@@ -362,7 +394,7 @@ window.addEventListener('load', async function () {
         }
     ];
 
-    const Address = "0x260C4a73B00c7E86a5770c1231e560fA1f2D763b";
+    const Address = "0xf4c4D67E3D4C2A10Ff3223aC54997c42a3081465";
     window.web3 = await new Web3(window.ethereum); //how to access to smart contract 
     window.contract = await new window.web3.eth.Contract(ABI, Address); //how you create an instance of that contract by using the abi and address  
 });

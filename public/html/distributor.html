@@ -7,6 +7,7 @@
   <link href="../css/header.css" rel="stylesheet" />
   <link href="../css/style.css" rel="stylesheet" />
   <script src="../js/script.js"></script>
+  <script src="../js/checkDistributorAddress.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
 </head>
@@ -20,5 +21,10 @@
   </script>
 </body>
 
-
+<script>
+  let account;
+  window.addEventListener('load', async function () {
+    account = await checkDistributorAddress();
+  });
+</script>
 </html>

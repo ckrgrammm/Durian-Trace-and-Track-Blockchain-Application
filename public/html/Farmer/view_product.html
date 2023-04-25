@@ -69,6 +69,7 @@
   table.table tr th,
   table.table tr td {
     border-color: #e9e9e9;
+    word-wrap: break-word;
   }
 
   table.table th i {
@@ -151,36 +152,20 @@
             </div>
           </div>
         </div>
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="productTable">
           <thead>
             <tr>
               <th>Farmer Addr</th>
               <th>Distributor Addr</th>
               <th>Retailer Addr</th>
               <th>Customer Addr</th>
-              <th>Date</th>
               <th>Batch No.</th>
+              <th>Date</th>
               <th>Price</th>
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>John Doe</td>
-              <td>Administration</td>
-              <td>(171) 555-2222</td>
-              <td>John Doe</td>
-              <td>Administration</td>
-              <td>value</td>
-              <td>value</td>
-              <td>
-                <a class="add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                <a class="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                <a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                <a class="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-              </td>
-            </tr>
-
+          <tbody id="productTableBody">
           </tbody>
         </table>
       </div>
@@ -203,7 +188,10 @@
         '<td></td>' +
         '<td><input type="text" class="form-control" name="batch_no" id="batch_no"></td>' +
         '<td><input type="text" class="form-control" name="price" id="price"></td>' +
-        '<td>' + actions + '</td>' +
+        '<td><a class="add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>'+
+                '<a class="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>'+
+                '<a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>'+
+                '<a class="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>' +
         '</tr>';
       $("table").append(row);
       $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
@@ -236,6 +224,7 @@
 
             $(this).parents("tr").find(".add, .edit").toggle();
             $(".add-new").removeAttr("disabled");
+            location.reload();
           } catch (error) {
             console.error(error);
             alert("Transaction failed");
@@ -243,9 +232,20 @@
           }
         }
         addProduct();// Call addProduct function to send data to the smart contract
+        
       }
 
     });
+
+
+    // <td>
+    //             <a class="add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+    //             <a class="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+    //             <a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+    //             <a class="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+    //           </td>
+
+
 
     // Add row on save button click after edit
     $(document).on("click", ".save", function () {
@@ -290,12 +290,45 @@
 </script>
 
 <script>
-  //check the account if own by farmer
   let account;
   window.addEventListener('load', async function () {
-   account = await checkFarmerAddress();
-  });
+    account = await checkFarmerAddress();
+    const products = await contract.methods.getAllProduct().call();
+    const productListString = products.join(', ');
+    const productsArray = productListString.split(', ');
+    const productTableBody = document.getElementById('productTableBody');
 
+    productsArray.forEach(async (batchNumber) => {
+      const product = await contract.methods.products(batchNumber).call();
+      const farmer = product.farmer;
+      const distributor = product.distributor;
+      const retailer = product.retailer;
+      const consumer = product.consumer;
+      const batchNumberValue = product.batchNumber;
+      const dateValue = product.date;
+      const priceValue = product.price;
+
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td>${farmer}</td>
+        <td>${distributor}</td>
+        <td>${retailer}</td>
+        <td>${consumer}</td>
+        <td>${batchNumberValue}</td>
+        <td>${dateValue}</td>
+        <td>${priceValue}</td>
+        <td>
+          <a class="add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+          <a class="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+          <a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+          <a class="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+        </td>
+      `;
+
+      productTableBody.appendChild(newRow);
+    });
+  });
 </script>
+
 
 </html>
