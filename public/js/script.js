@@ -12,6 +12,16 @@ window.addEventListener('load', async function () {
                     "internalType": "uint256",
                     "name": "_price",
                     "type": "uint256"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_category",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_tree",
+                    "type": "string"
                 }
             ],
             "name": "addProduct",
@@ -71,12 +81,25 @@ window.addEventListener('load', async function () {
         {
             "inputs": [
                 {
-                    "internalType": "address",
-                    "name": "_distributor",
-                    "type": "address"
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
                 }
             ],
-            "name": "setDistributor",
+            "name": "confirmReceivedFromDistributor",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                }
+            ],
+            "name": "confirmReceivedFromRetailer",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -85,6 +108,55 @@ window.addEventListener('load', async function () {
             "inputs": [],
             "stateMutability": "nonpayable",
             "type": "constructor"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "string",
+                    "name": "batchNumber",
+                    "type": "string"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "comment",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "CommentSubmitted",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_comment",
+                    "type": "string"
+                }
+            ],
+            "name": "leaveComment",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
         },
         {
             "anonymous": false,
@@ -134,47 +206,24 @@ window.addEventListener('load', async function () {
             "inputs": [
                 {
                     "internalType": "address",
+                    "name": "_distributor",
+                    "type": "address"
+                }
+            ],
+            "name": "setDistributor",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
                     "name": "_retailer",
                     "type": "address"
                 }
             ],
             "name": "setRetailer",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                },
-                {
-                    "internalType": "address",
-                    "name": "_distributor",
-                    "type": "address"
-                }
-            ],
-            "name": "shipToDistributor",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                },
-                {
-                    "internalType": "address",
-                    "name": "_retailer",
-                    "type": "address"
-                }
-            ],
-            "name": "shipToRetailer",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -280,19 +329,6 @@ window.addEventListener('load', async function () {
             "type": "function"
         },
         {
-            "inputs": [],
-            "name": "getAllProduct",
-            "outputs": [
-                {
-                    "internalType": "string[]",
-                    "name": "",
-                    "type": "string[]"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
             "inputs": [
                 {
                     "internalType": "string",
@@ -306,25 +342,6 @@ window.addEventListener('load', async function () {
                     "internalType": "address",
                     "name": "",
                     "type": "address"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "name": "productAll",
-            "outputs": [
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
                 }
             ],
             "stateMutability": "view",
@@ -374,6 +391,31 @@ window.addEventListener('load', async function () {
                     "internalType": "uint256",
                     "name": "price",
                     "type": "uint256"
+                },
+                {
+                    "internalType": "string",
+                    "name": "category",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "distributorReceivedDate",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "retailerReceivedDate",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "string",
+                    "name": "comment",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "tree",
+                    "type": "string"
                 }
             ],
             "stateMutability": "view",
@@ -394,7 +436,7 @@ window.addEventListener('load', async function () {
         }
     ];
 
-    const Address = "0xf4c4D67E3D4C2A10Ff3223aC54997c42a3081465";
+    const Address = "0x0204DB0e9631A73B000C47Bd325BeD7385b04265";
     window.web3 = await new Web3(window.ethereum); //how to access to smart contract 
     window.contract = await new window.web3.eth.Contract(ABI, Address); //how you create an instance of that contract by using the abi and address  
 });
