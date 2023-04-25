@@ -220,26 +220,41 @@
 
       $(this).parents("tr").find(".error").first().focus();
       if (!empty) {
-        input.each(function () {
-          $(this).parent("td").html($(this).val());
-        });
-        $(this).parents("tr").find(".save, .edit").toggle();
+        const updateProduct = async () => {
+          const batchNumber = input.eq(0).val();
+          const price = input.eq(1).val();
+          try {
+            await window.contract.methods.updatePriceD(batchNumber, price).send({ from: account });
+            input.each(function () {
+              $(this).parent("td").html($(this).val());
+            });
+
+            $(this).parents("tr").find(".add, .edit").toggle();
+            $(".add-new").removeAttr("disabled");
+            location.reload();
+          } catch (error) {
+            console.error(error);
+            alert("Transaction failed");
+            return;
+          }
+        }
+        updateProduct();// Call addProduct function to send data to the smart contract
+        
       }
     });
 
 
     // Edit row on edit button click
     $(document).on("click", ".edit", function () {
-      $(this).parents("tr").find("td:nth-last-of-type(2),td:nth-last-of-type(3)").each(function () {
-        $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+      $(this).parents("tr").find("td:nth-last-of-type(7),td:nth-last-of-type(9)").each(function () {
+        $(this).html('<input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" value="' + $(this).text() + '">');
+        if ($(this).is(':nth-last-of-type(9)')) {
+          $(this).find('input').prop('disabled', true);
+        }
       });
       $(this).parents("tr").find(".save, .edit").toggle();
     });
 
-    // Delete row on delete button click
-    $(document).on("click", ".delete", function () {
-      $(this).parents("tr").remove();
-    });
   });
 </script>
 
@@ -248,13 +263,13 @@
   window.addEventListener('load', async function () {
     account = await checkDistributorAddress();
     const distAddresss = await contract.methods.distributor().call();
-
     const products = await contract.methods.getAllProduct().call();
     const productListString = products.join(', ');
     const productsArray = productListString.split(', ');
     const productTableBody = document.getElementById('productTableBody');
 
     productsArray.forEach(async (batchNumber) => {
+      const ownerAddress = await contract.methods.getCurrentOwner(batchNumber).call();
       const product = await contract.methods.products(batchNumber).call();
       const farmer = product.farmer;
       const distributor = product.distributor;
@@ -285,12 +300,12 @@
         <td>
         ${distributor === "0x0000000000000000000000000000000000000000"
           ? `<a class="buy" data-toggle="tooltip" title="buy" style="color:green !important"><i class="material-icons"><span class="material-symbols-outlined">shopping_cart_checkout</span></i></a>`
-          : distributor.toLowerCase() === distAddresss.toLowerCase()&&distReceiveDate==='0'
+          : distributor.toLowerCase() === distAddresss.toLowerCase() && distReceiveDate === '0'
             ? `<a class="received" title="order received" data-toggle="tooltip" style="color:grey !important"><i class="material-icons"><span class="material-symbols-outlined">local_shipping</span></i></a>`
-            : `<a class="edit" data-toggle="tooltip" title="edit"><i class="material-icons">&#xE254;</i></a>`
+            : distributor.toLowerCase() === ownerAddress.toLowerCase()
+            ? `<a class="edit" data-toggle="tooltip" title="edit"><i class="material-icons">&#xE254;</i></a>`:``
         }
         <a class="save" title="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-        <a class="delete" title="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
       </td>
 
       `;

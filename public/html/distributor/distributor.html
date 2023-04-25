@@ -149,52 +149,7 @@
               Product</span></button>
         </td>
       </tr>
-
-      <tr>
-
-      </tr>
-      <tr>
-        <td>
-          <table class="smallTable">
-            <tr>
-              <td>
-                <label for="batchNumber2">Batch Number:</label>
-              </td>
-              <td>
-                <input type="text" id="batchNumber2" name="batchNumber2"><br>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label for="price">Price:</label>
-              </td>
-              <td>
-                <input type="text" id="price" name="price"><br>
-              </td>
-            </tr>
-          </table>
-      <tr>
-        <td>
-          <button class="custom-btn btn-12" onclick="updatePrice()"><span>Click!</span><span>Update</span></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-        </td>
-        <td>
-          <div id="updatePriceMsg" style="max-width: 350px; text-align: center;max-height: 100px;"></div>
-        </td>
-      </tr>
-
-      </td>
-      </tr>
-
     </table>
-
-
-
-
-
   </div>
 
 </body>
@@ -207,33 +162,6 @@
 
   const viewProduct = async () => {
     window.location.href = "view_product.html";
-  }
-
-
-
-  const updatePrice = async () => {
-    const batchNumber = document.getElementById("batchNumber2").value;
-    const price = document.getElementById("price").value;
-
-    try {
-      await window.contract.methods.updatePriceD(batchNumber, price).send({ from: account });
-      document.getElementById("price").value = "";
-      document.getElementById("batchNumber2").value = "";
-
-      // Set the success message to green
-      document.getElementById("updatePriceMsg").innerHTML = "The product has been updated successfully.";
-      document.getElementById("updatePriceMsg").style.color = "green";
-    } catch (error) {
-      // Catch the error message if the shipToDistributor call fails
-      var errorMessage = error.message;
-      var maxLength = 100;
-      if (errorMessage.length > maxLength) {
-        errorMessage = errorMessage.substring(0, maxLength) + "...";
-      }
-      document.getElementById("updatePriceMsg").innerHTML = errorMessage;
-      // Set the error message to red
-      document.getElementById("updatePriceMsg").style.color = "red";
-    }
   }
 </script>
 

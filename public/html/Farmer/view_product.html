@@ -193,14 +193,14 @@
         '<td></td>' +
         '<td></td>' +
         '<td></td>' +
-        '<td><input type="text" class="form-control" name="batch_no" id="batch_no"></td>' +
+        '<td><input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" name="batch_no" id="batch_no"></td>' +
         '<td></td>' +
-        '<td><input type="text" class="form-control" name="price" id="price"></td>' +
-        '<td><input type="text" class="form-control" name="category" id="category"></td>' +
+        '<td><input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" name="price" id="price"></td>' +
+        '<td><input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" name="category" id="category"></td>' +
         '<td></td>' +
         '<td></td>' +
         '<td></td>' +
-        '<td><input type="text" class="form-control" name="tree" id="tree"></td>' +
+        '<td><input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" name="tree" id="tree"></td>' +
         '<td><a class="add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>'+
                 '<a class="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>'+
                 '<a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>'+
@@ -281,7 +281,7 @@
     // Edit row on edit button click
     $(document).on("click", ".edit", function () {
       $(this).parents("tr").find("td:nth-last-of-type(2),td:nth-last-of-type(3)").each(function () {
-        $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+        $(this).html('<input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" value="' + $(this).text() + '">');
       });
       $(this).parents("tr").find(".save, .edit").toggle();
       $(".add-new").attr("disabled", "disabled");
