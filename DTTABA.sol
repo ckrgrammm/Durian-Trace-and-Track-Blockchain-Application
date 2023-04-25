@@ -19,6 +19,11 @@ contract DTTBA {
         string batchNumber;
         uint256 date;
         uint256 price;
+        string category;
+        uint256 distributorReceivedDate;
+        uint256 retailerReceivedDate;
+        string comment;
+        string tree;
     }
 
     // Farmer add product.
@@ -36,7 +41,6 @@ contract DTTBA {
     // uint256 private productIndex = 0;
     // mapping(string => Product) private products;
     mapping(string => Product) public products;
-
     string[] public productAll;
 
     function getAllProduct(
@@ -50,9 +54,19 @@ contract DTTBA {
         address indexed newOwner
     );
 
-    event ProductShipped(string indexed _batchNumber, address indexed _distributor, uint256 indexed timestamp);
+    event ProductShipped(
+        string indexed _batchNumber,
+        address indexed _distributor,
+        uint256 indexed timestamp
+    );
 
     event PriceUpdated(string indexed batchNumber, uint256 newPrice);
+    event CommentSubmitted(
+        string indexed batchNumber,
+        address indexed user,
+        string comment,
+        uint256 timestamp
+    );
 
     modifier onlyFarmer() {
         require(msg.sender == farmer, "Only Farmer can perform this action");
@@ -75,7 +89,13 @@ contract DTTBA {
         _;
     }
 
-    function addProduct(string memory _batchNumber, uint256 _price) public {
+    function addProduct(
+        string memory _batchNumber,
+        uint256 _price,
+        string memory _category,
+        string memory _tree
+
+    ) public {
         require(
             products[_batchNumber].farmer == address(0),
             "Product already exists"
@@ -96,7 +116,13 @@ contract DTTBA {
             consumer: address(0),
             batchNumber: _batchNumber,
             date: block.timestamp,
-            price: _price
+            price: _price,
+            category: _category,
+            tree: _tree,
+            distributorReceivedDate: 0,
+            retailerReceivedDate: 0,
+            comment: ""
+            
         });
             productAll.push(_batchNumber);
     }
@@ -124,8 +150,13 @@ contract DTTBA {
         Product storage product = products[_batchNumber];
         uint256 price = product.price;
 
-        require(msg.value >= _amount, "Insufficient payment");
+
+        require(msg.value >= price, "Insufficient payment for full price of product");
         require(_amount > 0, "Amount must be greater than 0");
+        //require(msg.value >= _amount, "Insufficient payment");
+ 
+
+
 
         product.distributor = msg.sender;
 
@@ -142,45 +173,6 @@ contract DTTBA {
         }
     }
 
-    // function buyFromFarmer(string memory _batchNumber)
-    //     public
-    //     payable
-    //     onlyDistributor
-    // {
-    //     require(
-    //         products[_batchNumber].farmer != address(0),
-    //         "Product does not exist"
-    //     );
-    //     require(
-    //         products[_batchNumber].distributor == address(0),
-    //         "Product already sold"
-    //     );
-    //     require(
-    //         msg.sender != products[_batchNumber].farmer,
-    //         "Farmers are not allowed to buy their own product"
-    //     );
-
-    //     Product storage product = products[_batchNumber];
-    //     uint256 price = product.price;
-
-    //     require(msg.value >= price, "Insufficient payment");
-    //     require(price > 0, "Price not set");
-
-    //     product.distributor = msg.sender;
-
-    //     uint256 change = msg.value - price;
-    //     if (change > 0) {
-    //         payable(msg.sender).transfer(change);
-    //     }
-
-    //     emit TransferOwnership(_batchNumber, product.farmer, msg.sender);
-
-    //     // Check if the distributor wants to set a new price
-    //     if (msg.value > price) {
-    //         product.price = msg.value;
-    //     }
-    // }
-
     function updatePriceD(string memory _batchNumber, uint256 _newPrice)
         public
         onlyDistributor
@@ -195,31 +187,6 @@ contract DTTBA {
 
         emit PriceUpdated(_batchNumber, _newPrice);
     }
-
-    //Buy Product From Distributor
-    // function buyFromDistributor(string memory _batchNumber) public payable {
-    //     require(
-    //         products[_batchNumber].distributor != address(0),
-    //         "Product is not available yet"
-    //     );
-    //     require(
-    //         products[_batchNumber].retailer == address(0),
-    //         "Product already bought by a retailer"
-    //     );
-    //     require(
-    //         msg.sender != products[_batchNumber].distributor,
-    //         "Distributors are not allowed to buy their own product"
-    //     );
-    //     require(
-    //         msg.sender == retailer,
-    //         "Only retailers can buy from distributors"
-    //     );
-
-    //     products[_batchNumber].retailer = msg.sender;
-    //     products[_batchNumber].date = block.timestamp;
-
-    //     payable(products[_batchNumber].distributor).transfer(msg.value);
-    // }
 
     function buyFromDistributor(
         string memory _batchNumber,
@@ -306,56 +273,59 @@ contract DTTBA {
         emit TransferOwnership(_batchNumber, product.retailer, msg.sender);
     }
 
-function shipToDistributor(string memory _batchNumber, address _distributor)
-    public
-{
-    require(
-        products[_batchNumber].farmer == msg.sender,
-        "You don't own this product"
-    );
-    require(
-        products[_batchNumber].distributor == address(0),
-        "Product already shipped"
-    );
-
-    products[_batchNumber].distributor = _distributor;
-
-    emit ProductShipped(_batchNumber, _distributor, block.timestamp);
-}
-
-
-    function shipToRetailer(string memory _batchNumber, address _retailer)
+    function leaveComment(string memory _batchNumber, string memory _comment)
         public
     {
         require(
-            products[_batchNumber].distributor == msg.sender,
-            "You don't own this product"
+            products[_batchNumber].consumer == msg.sender,
+            "Only the consumer who purchased this product can leave a comment"
         );
         require(
-            products[_batchNumber].retailer == address(0),
-            "Product already shipped"
+            bytes(products[_batchNumber].comment).length == 0,
+            "Comment already submitted for this product"
         );
 
-        products[_batchNumber].retailer = _retailer;
+        products[_batchNumber].comment = _comment;
+
+        emit CommentSubmitted(
+            _batchNumber,
+            msg.sender,
+            _comment,
+            block.timestamp
+        );
     }
 
-  
+    function confirmReceivedFromDistributor(string memory _batchNumber)
+        public
+        onlyDistributor
+    {
+        require(
+            products[_batchNumber].distributor == msg.sender,
+            "Only the distributor who purchased this product can confirm receipt"
+        );
+        require(
+            products[_batchNumber].distributorReceivedDate == 0,
+            "Product receipt already confirmed by the distributor"
+        );
 
-    // I think this function is replaced by the buyProduct function
-    // function sellToConsumer(string memory _batchNumber, address _consumer)
-    //     public
-    // {
-    //     require(
-    //         products[_batchNumber].retailer == msg.sender,
-    //         "You don't own this product"
-    //     );
-    //     require(
-    //         products[_batchNumber].consumer == address(0),
-    //         "Product already sold"
-    //     );
+        products[_batchNumber].distributorReceivedDate = block.timestamp;
+    }
 
-    //     products[_batchNumber].consumer = _consumer;
-    // }
+    function confirmReceivedFromRetailer(string memory _batchNumber)
+        public
+        onlyRetailer
+    {
+        require(
+            products[_batchNumber].retailer == msg.sender,
+            "Only the retailer who purchased this product can confirm receipt"
+        );
+        require(
+            products[_batchNumber].retailerReceivedDate == 0,
+            "Product receipt already confirmed by the retailer"
+        );
+
+        products[_batchNumber].retailerReceivedDate = block.timestamp;
+    }
 
     //Trace Current Owner
     function getCurrentOwner(string memory _batchNumber)
@@ -390,6 +360,19 @@ function shipToDistributor(string memory _batchNumber, address _distributor)
     }
 }
 
+// add the shipping function required the timestap functions of the product , and the consumer can add the comment
+// put a received function
 
-// add the shipping function required the timestap functions of the product , and the consumer can add the comment 
-// put a received function 
+//92148 is the owner address then depploy
+//now need to set distributor and retialer first copy address
+// now we got distributor and retailer
+//now owner address register
+//owner is equal to farmer
+//now use distributor to buy 1durian switch address
+//then u can see the current address is change to the distributor d
+//40225 is the distributor
+//then after the distributor can update the product price
+//if you now see, the product price is change to 30.
+//now use retailer address to buy
+//get again the current owner wil change to the retailer
+//same goes to the consumer
