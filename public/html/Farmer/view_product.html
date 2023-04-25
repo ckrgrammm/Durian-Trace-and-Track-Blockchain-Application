@@ -30,7 +30,7 @@
 
 <style>
   .table-wrapper {
-    width: 1000px;
+    width: 1500px;
     margin: 30px auto;
     background: #fff;
     padding: 20px;
@@ -64,12 +64,14 @@
 
   table.table {
     table-layout: fixed;
+    overflow: scroll; /* Scrollbar are always visible */
+    overflow: auto;   /* Scrollbar is displayed as it's needed */
   }
 
   table.table tr th,
   table.table tr td {
     border-color: #e9e9e9;
-    word-wrap: break-word;
+    width: 100px;
   }
 
   table.table th i {
@@ -139,7 +141,7 @@
       });
     });
   </script>
-  <div class="container-lg" style="padding-top: 75px;">
+  <div class="container-lg" style="padding-top: 75px; max-width: 80%;">
     <div class="table-responsive">
       <div class="table-wrapper">
         <div class="table-title">
@@ -162,6 +164,11 @@
               <th>Batch No.</th>
               <th>Date</th>
               <th>Price</th>
+              <th>Category</th>
+              <th>Dist Receive Date</th>
+              <th>Retailer Receive Date</th>
+              <th>Comment</th>
+              <th>Tree</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -185,9 +192,14 @@
         '<td></td>' +
         '<td></td>' +
         '<td></td>' +
-        '<td></td>' +
         '<td><input type="text" class="form-control" name="batch_no" id="batch_no"></td>' +
+        '<td></td>' +
         '<td><input type="text" class="form-control" name="price" id="price"></td>' +
+        '<td><input type="text" class="form-control" name="category" id="category"></td>' +
+        '<td></td>' +
+        '<td></td>' +
+        '<td></td>' +
+        '<td><input type="text" class="form-control" name="tree" id="tree"></td>' +
         '<td><a class="add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>'+
                 '<a class="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>'+
                 '<a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>'+
@@ -216,8 +228,10 @@
         const addProduct = async () => {
           const _batchNumber = input.eq(0).val();
           const price = input.eq(1).val();
+          const category = input.eq(2).val();
+          const tree = input.eq(3).val();
           try {
-            await window.contract.methods.addProduct(_batchNumber, price).send({ from: account });
+            await window.contract.methods.addProduct(_batchNumber, price,category,tree).send({ from: account });
             input.each(function () {
               $(this).parent("td").html($(this).val());
             });
