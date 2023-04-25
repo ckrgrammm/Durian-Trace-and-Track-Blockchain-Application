@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Durian Tracking</title>
-  <link href="../../css/style.css" rel="stylesheet" />
   <link href="../../css/header.css" rel="stylesheet" />
+  <link href="../../css/style.css" rel="stylesheet" />
   <script src="../../js/script.js"></script>
-  <script src="../../js/checkFarmerAddress.js"></script>
+  <script src="../../js/checkDistributorAddress.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
 </head>
@@ -109,7 +109,6 @@
 
   .table tr,
   .table td {
-    width: 350px;
     text-align: center;
     height: 50px;
     min-height: 50px;
@@ -122,7 +121,8 @@
   }
 
   .smallTable {
-    width: 350px;
+    margin: 0 auto;
+    width: 50%;
   }
 
   .smallTable tr,
@@ -145,70 +145,44 @@
     <table class="table">
       <tr>
         <td>
-          <label for="distributor">Distributor:</label>
-          <input type="text" id="distributor" name="distributor"><br>
-
-        </td>
-        <td>
-          <label for="retailer">Retailer:</label>
-          <input type="text" id="retailer" name="retailer"><br>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <button class="custom-btn btn-12" onclick="setDistributor()"><span>Click!</span><span>Set
-              Distributor</span></button><br>
-        </td>
-        <td>
-          <button class="custom-btn btn-12" onclick="setRetailer()"><span>Click!</span><span>Set
-              Retailer</span></button><br>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div id="setDistributorMsg" style="max-width: 350px; text-align: center;max-height: 100px;"></div>
-        </td>
-        <td>
-          <div id="setRetailerMsg" style="max-width: 350px; text-align: center;max-height: 100px;"></div>
-        </td>
-      </tr>
-      <tr>
-        <td>
           <button class="custom-btn btn-12" onclick="viewProduct()"><span>Click!</span><span>View
-              Product</span></button><br>
+              Product</span></button>
         </td>
+      </tr>
+
+      <tr>
+
+      </tr>
+      <tr>
         <td>
           <table class="smallTable">
             <tr>
               <td>
-                <label for="batchNumber">Batch Number:</label>
+                <label for="batchNumber2">Batch Number:</label>
               </td>
               <td>
-                <input type="text" id="batchNumber" name="batchNumber"><br>
+                <input type="text" id="batchNumber2" name="batchNumber2"><br>
               </td>
             </tr>
             <tr>
               <td>
-                <label for="shipToDistributor">Ship To Distributor:</label>
+                <label for="price">Price:</label>
               </td>
               <td>
-                <input type="text" id="shipToDistributor" name="shipToDistributor"><br>
+                <input type="text" id="price" name="price"><br>
               </td>
             </tr>
           </table>
       <tr>
         <td>
-        </td>
-        <td>
-          <button class="custom-btn btn-12" onclick="shipToDistributor()"><span>Click!</span><span>Ship to
-              Distributor</span></button>
+          <button class="custom-btn btn-12" onclick="updatePrice()"><span>Click!</span><span>Update</span></button>
         </td>
       </tr>
       <tr>
         <td>
         </td>
         <td>
-          <div id="shipDistributorMsg" style="max-width: 350px; text-align: center;max-height: 100px;"></div>
+          <div id="updatePriceMsg" style="max-width: 350px; text-align: center;max-height: 100px;"></div>
         </td>
       </tr>
 
@@ -224,56 +198,12 @@
   </div>
 
 </body>
+
 <script>
-  //check the account if own by farmer
   let account;
   window.addEventListener('load', async function () {
-    account = await checkFarmerAddress();
+    account = await checkDistributorAddress();
   });
-
-  const setDistributor = async () => {
-    const Distributor = document.getElementById("distributor").value;
-    try {
-      await window.contract.methods.setDistributor(Distributor).send({ from: account });
-      document.getElementById("distributor").value = "";
-      // Set the success message to green
-      document.getElementById("setDistributorMsg").innerHTML = "The distributor address has been set successfully.";
-      document.getElementById("setDistributorMsg").style.color = "green";
-    } catch (error) {
-      // Catch the error message if the distributor address is invalid
-      var errorMessage = error.message;
-      var maxLength = 100;
-      if (errorMessage.length > maxLength) {
-        errorMessage = errorMessage.substring(0, maxLength) + "...";
-      }
-      document.getElementById("setDistributorMsg").innerHTML = errorMessage;
-      // Set the error message to red
-      document.getElementById("setDistributorMsg").style.color = "red";
-    }
-
-  }
-
-  const setRetailer = async () => {
-    const Retailer = document.getElementById("retailer").value;
-    try {
-      await window.contract.methods.setRetailer(Retailer).send({ from: account });
-      document.getElementById("retailer").value = "";
-      // Set the success message to green
-      document.getElementById("setRetailerMsg").innerHTML = "The retailer address has been set successfully.";
-      document.getElementById("setRetailerMsg").style.color = "green";
-    } catch (error) {
-      // Catch the error message if the retailer address is invalid
-      var errorMessage = error.message;
-      var maxLength = 100;
-      if (errorMessage.length > maxLength) {
-        errorMessage = errorMessage.substring(0, maxLength) + "...";
-      }
-      document.getElementById("setRetailerMsg").innerHTML = errorMessage;
-      // Set the error message to red
-      document.getElementById("setRetailerMsg").style.color = "red";
-    }
-
-  }
 
   const viewProduct = async () => {
     window.location.href = "view_product.html";
@@ -281,18 +211,18 @@
 
 
 
-  const shipToDistributor = async () => {
-    const shipToDistributor = document.getElementById("shipToDistributor").value;
-    const batchNumber = document.getElementById("batchNumber").value;
+  const updatePrice = async () => {
+    const batchNumber = document.getElementById("batchNumber2").value;
+    const price = document.getElementById("price").value;
 
     try {
-      await window.contract.methods.shipToDistributor(batchNumber, shipToDistributor).send({ from: account });
-      document.getElementById("shipToDistributor").value = "";
-      document.getElementById("batchNumber").value = "";
+      await window.contract.methods.updatePriceD(batchNumber, price).send({ from: account });
+      document.getElementById("price").value = "";
+      document.getElementById("batchNumber2").value = "";
 
       // Set the success message to green
-      document.getElementById("shipDistributorMsg").innerHTML = "The product has been shipped to the distributor successfully.";
-      document.getElementById("shipDistributorMsg").style.color = "green";
+      document.getElementById("updatePriceMsg").innerHTML = "The product has been updated successfully.";
+      document.getElementById("updatePriceMsg").style.color = "green";
     } catch (error) {
       // Catch the error message if the shipToDistributor call fails
       var errorMessage = error.message;
@@ -300,13 +230,11 @@
       if (errorMessage.length > maxLength) {
         errorMessage = errorMessage.substring(0, maxLength) + "...";
       }
-      document.getElementById("shipDistributorMsg").innerHTML = errorMessage;
+      document.getElementById("updatePriceMsg").innerHTML = errorMessage;
       // Set the error message to red
-      document.getElementById("shipDistributorMsg").style.color = "red";
+      document.getElementById("updatePriceMsg").style.color = "red";
     }
   }
-
-
 </script>
 
 </html>
