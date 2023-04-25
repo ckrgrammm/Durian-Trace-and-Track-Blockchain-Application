@@ -173,46 +173,10 @@
         </td>
       </tr>
       <tr>
-        <td>
+        <td colspan="2">
           <button class="custom-btn btn-12" onclick="viewProduct()"><span>Click!</span><span>View
               Product</span></button><br>
         </td>
-        <td>
-          <table class="smallTable">
-            <tr>
-              <td>
-                <label for="batchNumber">Batch Number:</label>
-              </td>
-              <td>
-                <input type="text" id="batchNumber" name="batchNumber"><br>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label for="shipToDistributor">Ship To Distributor:</label>
-              </td>
-              <td>
-                <input type="text" id="shipToDistributor" name="shipToDistributor"><br>
-              </td>
-            </tr>
-          </table>
-      <tr>
-        <td>
-        </td>
-        <td>
-          <button class="custom-btn btn-12" onclick="shipToDistributor()"><span>Click!</span><span>Ship to
-              Distributor</span></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-        </td>
-        <td>
-          <div id="shipDistributorMsg" style="max-width: 350px; text-align: center;max-height: 100px;"></div>
-        </td>
-      </tr>
-
-      </td>
       </tr>
 
     </table>
@@ -278,34 +242,6 @@
   const viewProduct = async () => {
     window.location.href = "view_product.html";
   }
-
-
-
-  const shipToDistributor = async () => {
-    const shipToDistributor = document.getElementById("shipToDistributor").value;
-    const batchNumber = document.getElementById("batchNumber").value;
-
-    try {
-      await window.contract.methods.shipToDistributor(batchNumber, shipToDistributor).send({ from: account });
-      document.getElementById("shipToDistributor").value = "";
-      document.getElementById("batchNumber").value = "";
-
-      // Set the success message to green
-      document.getElementById("shipDistributorMsg").innerHTML = "The product has been shipped to the distributor successfully.";
-      document.getElementById("shipDistributorMsg").style.color = "green";
-    } catch (error) {
-      // Catch the error message if the shipToDistributor call fails
-      var errorMessage = error.message;
-      var maxLength = 100;
-      if (errorMessage.length > maxLength) {
-        errorMessage = errorMessage.substring(0, maxLength) + "...";
-      }
-      document.getElementById("shipDistributorMsg").innerHTML = errorMessage;
-      // Set the error message to red
-      document.getElementById("shipDistributorMsg").style.color = "red";
-    }
-  }
-
 
 </script>
 
