@@ -23,6 +23,7 @@ contract DTTBA {
         uint256 distributorReceivedDate;
         uint256 retailerReceivedDate;
         string comment;
+        string tree;
     }
 
     // Farmer add product.
@@ -85,7 +86,9 @@ contract DTTBA {
     function addProduct(
         string memory _batchNumber,
         uint256 _price,
-        string memory _category
+        string memory _category,
+        string memory _tree
+
     ) public {
         require(
             products[_batchNumber].farmer == address(0),
@@ -109,9 +112,11 @@ contract DTTBA {
             date: block.timestamp,
             price: _price,
             category: _category,
+            tree: _tree,
             distributorReceivedDate: 0,
             retailerReceivedDate: 0,
             comment: ""
+            
         });
     }
 
@@ -138,8 +143,13 @@ contract DTTBA {
         Product storage product = products[_batchNumber];
         uint256 price = product.price;
 
-        require(msg.value >= _amount, "Insufficient payment");
+
+        require(msg.value >= price, "Insufficient payment for full price of product");
         require(_amount > 0, "Amount must be greater than 0");
+        //require(msg.value >= _amount, "Insufficient payment");
+ 
+
+
 
         product.distributor = msg.sender;
 
@@ -156,45 +166,6 @@ contract DTTBA {
         }
     }
 
-    // function buyFromFarmer(string memory _batchNumber)
-    //     public
-    //     payable
-    //     onlyDistributor
-    // {
-    //     require(
-    //         products[_batchNumber].farmer != address(0),
-    //         "Product does not exist"
-    //     );
-    //     require(
-    //         products[_batchNumber].distributor == address(0),
-    //         "Product already sold"
-    //     );
-    //     require(
-    //         msg.sender != products[_batchNumber].farmer,
-    //         "Farmers are not allowed to buy their own product"
-    //     );
-
-    //     Product storage product = products[_batchNumber];
-    //     uint256 price = product.price;
-
-    //     require(msg.value >= price, "Insufficient payment");
-    //     require(price > 0, "Price not set");
-
-    //     product.distributor = msg.sender;
-
-    //     uint256 change = msg.value - price;
-    //     if (change > 0) {
-    //         payable(msg.sender).transfer(change);
-    //     }
-
-    //     emit TransferOwnership(_batchNumber, product.farmer, msg.sender);
-
-    //     // Check if the distributor wants to set a new price
-    //     if (msg.value > price) {
-    //         product.price = msg.value;
-    //     }
-    // }
-
     function updatePriceD(string memory _batchNumber, uint256 _newPrice)
         public
         onlyDistributor
@@ -209,31 +180,6 @@ contract DTTBA {
 
         emit PriceUpdated(_batchNumber, _newPrice);
     }
-
-    //Buy Product From Distributor
-    // function buyFromDistributor(string memory _batchNumber) public payable {
-    //     require(
-    //         products[_batchNumber].distributor != address(0),
-    //         "Product is not available yet"
-    //     );
-    //     require(
-    //         products[_batchNumber].retailer == address(0),
-    //         "Product already bought by a retailer"
-    //     );
-    //     require(
-    //         msg.sender != products[_batchNumber].distributor,
-    //         "Distributors are not allowed to buy their own product"
-    //     );
-    //     require(
-    //         msg.sender == retailer,
-    //         "Only retailers can buy from distributors"
-    //     );
-
-    //     products[_batchNumber].retailer = msg.sender;
-    //     products[_batchNumber].date = block.timestamp;
-
-    //     payable(products[_batchNumber].distributor).transfer(msg.value);
-    // }
 
     function buyFromDistributor(
         string memory _batchNumber,
