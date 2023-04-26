@@ -185,9 +185,8 @@
         // Convert price from ether to wei
         const priceWei = window.web3.utils.toWei(price, "ether");
 
-
         try {
-          await window.contract.methods.buyFromFarmer(batchNumber, price).send({ from: account, value: priceWei });
+          await window.contract.methods.buyFromFarmer(batchNumber).send({ from: account, value: priceWei });
           location.reload();
         } catch (error) {
           console.error(error);

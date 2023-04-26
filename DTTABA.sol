@@ -129,49 +129,32 @@ contract DTTBA {
 
     //Distributor Buy from Farmer
 
-    function buyFromFarmer(string memory _batchNumber, uint256 _amount)
-        public
-        payable
-        onlyDistributor
-    {
-        require(
-            products[_batchNumber].farmer != address(0),
-            "Product does not exist"
-        );
-        require(
-            products[_batchNumber].distributor == address(0),
-            "Product already sold"
-        );
-        require(
-            msg.sender != products[_batchNumber].farmer,
-            "Farmers are not allowed to buy their own product"
-        );
+    function buyFromFarmer(string memory _batchNumber) public payable onlyDistributor {
+    require(products[_batchNumber].farmer != address(0), "Product does not exist");
+    require(products[_batchNumber].distributor == address(0), "Product already sold");
+    require(msg.sender != products[_batchNumber].farmer, "Farmers are not allowed to buy their own product");
 
-        Product storage product = products[_batchNumber];
-        uint256 price = product.price;
+    uint256 price = products[_batchNumber].price;
 
+    require(msg.value >= price, "Insufficient payment for full price of product");
 
-        require(msg.value >= price, "Insufficient payment for full price of product");
-        require(_amount > 0, "Amount must be greater than 0");
-        //require(msg.value >= _amount, "Insufficient payment");
- 
+    // Send payment to farmer
+    address payable farmerAddress = payable(products[_batchNumber].farmer);
+    farmerAddress.transfer(price);
 
+    // Set distributor as the new owner of the product
+    products[_batchNumber].distributor = msg.sender;
 
+    emit TransferOwnership(_batchNumber, products[_batchNumber].farmer, msg.sender);
 
-        product.distributor = msg.sender;
-
-        uint256 change = msg.value - _amount;
-        if (change > 0) {
-            payable(msg.sender).transfer(change);
-        }
-
-        emit TransferOwnership(_batchNumber, product.farmer, msg.sender);
-
-        // Check if the distributor wants to set a new price
-        if (_amount > price) {
-            product.price = _amount;
-        }
+    // Check if the distributor wants to set a new price
+    if (msg.value > price) {
+        products[_batchNumber].price = msg.value;
     }
+}
+
+
+
 
     function updatePriceD(string memory _batchNumber, uint256 _newPrice)
         public
