@@ -88,7 +88,8 @@ contract DTTBA {
         );
         _;
     }
-    event PaymentToFarmer(address indexed farmer, uint256 price);
+
+    event PaymentToAddress(address indexed receiver, uint256 price);
 
     function addProduct(
         string memory _batchNumber,
@@ -142,11 +143,11 @@ function buyFromFarmer(string memory _batchNumber) public payable onlyDistributo
     products[_batchNumber].distributor = msg.sender;
 
     emit TransferOwnership(_batchNumber, products[_batchNumber].farmer, msg.sender);
-    
+
     // Send payment to farmer
     address payable farmerAddress = payable(products[_batchNumber].farmer);
     farmerAddress.transfer(msg.value);
-    emit PaymentToFarmer(farmerAddress, msg.value);
+    emit PaymentToAddress(farmerAddress, msg.value);
 
 }
 
@@ -186,17 +187,20 @@ function buyFromFarmer(string memory _batchNumber) public payable onlyDistributo
 
         Product storage product = products[_batchNumber];
 
+        uint256 price = products[_batchNumber].price;
+
+        require(msg.value >= price, "Insufficient payment for full price of product");
+
+
         product.retailer = msg.sender;
         product.date = block.timestamp;
 
-        uint256 change = msg.value - product.price;
-        if (change > 0) {
-            payable(msg.sender).transfer(change);
-        }
-
         emit TransferOwnership(_batchNumber, product.distributor, msg.sender);
 
-        product.price = product.price; // This line is not necessary and can be removed
+        // Send payment to distributor
+        address payable distributorAddress = payable(products[_batchNumber].distributor);
+        distributorAddress.transfer(msg.value);
+        emit PaymentToAddress(distributorAddress, msg.value);
     }
 
     function updatePriceR(string memory _batchNumber, uint256 _newPrice)
@@ -241,12 +245,13 @@ function buyFromFarmer(string memory _batchNumber) public payable onlyDistributo
 
         product.consumer = msg.sender;
 
-        uint256 change = msg.value - price;
-        if (change > 0) {
-            payable(msg.sender).transfer(change);
-        }
 
         emit TransferOwnership(_batchNumber, product.retailer, msg.sender);
+
+        // Send payment to distributor
+        address payable retailerAddress = payable(products[_batchNumber].retailer);
+        retailerAddress.transfer(msg.value);
+        emit PaymentToAddress(retailerAddress, msg.value);
     }
 
     function leaveComment(string memory _batchNumber, string memory _comment)

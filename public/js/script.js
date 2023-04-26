@@ -43,7 +43,7 @@ window.addEventListener('load', async function () {
                 {
                     "indexed": true,
                     "internalType": "address",
-                    "name": "farmer",
+                    "name": "receiver",
                     "type": "address"
                 },
                 {
@@ -53,7 +53,7 @@ window.addEventListener('load', async function () {
                     "type": "uint256"
                 }
             ],
-            "name": "PaymentToFarmer",
+            "name": "PaymentToAddress",
             "type": "event"
         },
         {
@@ -477,7 +477,7 @@ window.addEventListener('load', async function () {
         }
     ];
 
-    const Address = "0xaC2945c464D5C479c981413E5c0A6BCF18a5b0E6";
+    const Address = "0x53d580bb88a0A144e5eE253E12DD98Cd9Cb2Db17";
     window.web3 = await new Web3(window.ethereum); //how to access to smart contract 
     window.contract = await new window.web3.eth.Contract(ABI, Address); //how you create an instance of that contract by using the abi and address  
 });

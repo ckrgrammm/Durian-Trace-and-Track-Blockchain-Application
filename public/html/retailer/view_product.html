@@ -180,16 +180,21 @@
       const buyProduct = async () => {
         const batchNumber = $(this).parents("tr").find("td").eq(4).text();
         const price = $(this).parents("tr").find("td").eq(6).text();
+
+        // Convert price from ether to wei
+        const priceWei = window.web3.utils.toWei(price, "ether");
+
         try {
-          await window.contract.methods.buyFromDistributor(batchNumber, price).send({ from: account });
+          await window.contract.methods.buyFromDistributor(batchNumber).send({ from: account, value: priceWei });
           location.reload();
         } catch (error) {
           console.error(error);
           alert("Transaction failed");
           return;
         }
-      }
-      buyProduct();// Call addProduct function to send data to the smart contract
+      };
+
+      buyProduct();
     });
 
     $(document).on("click", ".received", function () {
