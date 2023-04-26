@@ -190,18 +190,18 @@
     // Add row on save button click after edit
     $(document).on("click", ".post", function () {
       var empty = false;
-      var input = $(this).parents("tr").find('input[type="text"]');
-      input.each(function () {
+      var textarea = $(this).parents("tr").find('textarea');
+      textarea.each(function () {
         if (!$(this).val()) {
           $(this).addClass("error");
           empty = true;
         } else {
           $(this).removeClass("error");
         }
-
       });
 
       $(this).parents("tr").find(".error").first().focus();
+
       if (!empty) {
         const leaveComment = async () => {
           const batchNumber = $(this).parents("tr").find("td").eq(4).text();
@@ -224,8 +224,9 @@
     // Edit row on edit button click
     $(document).on("click", ".comment", function () {
       $(this).parents("tr").find("td:nth-last-of-type(3)").each(function () {
-        $(this).html('<textarea class="form-control" style="height:100px;">' + $(this).text() + '</textarea>');
+        $(this).html('<textarea class="form-control" style="height:100px;background-color:white" >' + $(this).text() + '</textarea>');
       });
+      $(this).parents("tr").find("td").css("background-color", "#ffd9b3");
       $(this).parents("tr").find(".post, .comment").toggle();
     });
 
@@ -280,9 +281,9 @@
         <td>${comment}</td>
         <td>${tree}</td>
         <td>
-        ${retailer !== "0x0000000000000000000000000000000000000000" && retailerReceiveDate !== '0' && consumer === "0x0000000000000000000000000000000000000000" && account.toLowerCase() !== retailer.toLowerCase()
+        ${retailer !== "0x0000000000000000000000000000000000000000" && retailerReceiveDate !== '0' && consumer === "0x0000000000000000000000000000000000000000" && account.toLowerCase() !== retailer.toLowerCase() && account.toLowerCase() !== distributor.toLowerCase() && account.toLowerCase() !== farmer.toLowerCase()
           ? `<a class="buy" data-toggle="tooltip" title="buy"><i class="material-icons"><span class="material-symbols-outlined">shopping_cart_checkout</span></i></a>`
-          : account.toLowerCase() === ownerAddress.toLowerCase() && consumer !== "0x0000000000000000000000000000000000000000"&&comment===""
+          : account.toLowerCase() === ownerAddress.toLowerCase() && consumer !== "0x0000000000000000000000000000000000000000" && comment === ""
             ? `<a class="comment" data-toggle="tooltip" title="comment"><i class="material-icons"><span class="material-symbols-outlined">rate_review</span></i></a>` : ``
         }
         <a class="post" title="post" data-toggle="tooltip" style="color:grey !important"><i class="material-icons"><span class="material-symbols-outlined">post_add</span></i></a>
