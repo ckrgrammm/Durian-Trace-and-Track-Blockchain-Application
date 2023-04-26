@@ -129,7 +129,7 @@ contract DTTBA {
 
     //Distributor Buy from Farmer
 
-    function buyFromFarmer(string memory _batchNumber, uint256 _amount)
+    function buyFromFarmer(string memory _batchNumber)
         public
         payable
         onlyDistributor
@@ -150,27 +150,19 @@ contract DTTBA {
         Product storage product = products[_batchNumber];
         uint256 price = product.price;
 
-
-        require(msg.value >= price, "Insufficient payment for full price of product");
-        require(_amount > 0, "Amount must be greater than 0");
-        //require(msg.value >= _amount, "Insufficient payment");
- 
-
-
+        require(
+            msg.value >= price,
+            "Insufficient payment for full price of product"
+        );
 
         product.distributor = msg.sender;
 
-        uint256 change = msg.value - _amount;
+        uint256 change = msg.value - price;
         if (change > 0) {
             payable(msg.sender).transfer(change);
         }
 
         emit TransferOwnership(_batchNumber, product.farmer, msg.sender);
-
-        // Check if the distributor wants to set a new price
-        if (_amount > price) {
-            product.price = _amount;
-        }
     }
 
     function updatePriceD(string memory _batchNumber, uint256 _newPrice)
@@ -188,10 +180,11 @@ contract DTTBA {
         emit PriceUpdated(_batchNumber, _newPrice);
     }
 
-    function buyFromDistributor(
-        string memory _batchNumber,
-        uint256 _expectedPrice
-    ) public payable onlyRetailer {
+       function buyFromDistributor(string memory _batchNumber)
+        public
+        payable
+        onlyRetailer
+    {
         require(
             products[_batchNumber].distributor != address(0),
             "Product is not available yet"
@@ -204,23 +197,21 @@ contract DTTBA {
             msg.sender != products[_batchNumber].distributor,
             "Distributors are not allowed to buy their own product"
         );
-        require(msg.value >= _expectedPrice, "Insufficient payment");
+        require(msg.value >= products[_batchNumber].price, "Insufficient payment");
 
         Product storage product = products[_batchNumber];
-
-        require(product.price == _expectedPrice, "Incorrect price");
 
         product.retailer = msg.sender;
         product.date = block.timestamp;
 
-        uint256 change = msg.value - _expectedPrice;
+        uint256 change = msg.value - product.price;
         if (change > 0) {
             payable(msg.sender).transfer(change);
         }
 
         emit TransferOwnership(_batchNumber, product.distributor, msg.sender);
 
-        product.price = _expectedPrice;
+        product.price = product.price; // This line is not necessary and can be removed
     }
 
     function updatePriceR(string memory _batchNumber, uint256 _newPrice)
