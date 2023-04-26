@@ -1,6 +1,6 @@
 window.addEventListener('load', async function () {
 
-    const ABI = [
+    const ABI =[
         {
             "inputs": [],
             "stateMutability": "nonpayable",
@@ -35,6 +35,25 @@ window.addEventListener('load', async function () {
                 }
             ],
             "name": "CommentSubmitted",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "farmer",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "price",
+                    "type": "uint256"
+                }
+            ],
+            "name": "PaymentToFarmer",
             "type": "event"
         },
         {
@@ -140,11 +159,6 @@ window.addEventListener('load', async function () {
                     "internalType": "string",
                     "name": "_batchNumber",
                     "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_expectedPrice",
-                    "type": "uint256"
                 }
             ],
             "name": "buyFromDistributor",
@@ -463,7 +477,7 @@ window.addEventListener('load', async function () {
         }
     ];
 
-    const Address = "0x6fF9E87E62CC449A70a515308A43fFc60e68DCde";
+    const Address = "0xaC2945c464D5C479c981413E5c0A6BCF18a5b0E6";
     window.web3 = await new Web3(window.ethereum); //how to access to smart contract 
     window.contract = await new window.web3.eth.Contract(ABI, Address); //how you create an instance of that contract by using the abi and address  
 });
