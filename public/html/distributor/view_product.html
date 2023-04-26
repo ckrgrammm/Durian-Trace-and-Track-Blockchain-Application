@@ -68,7 +68,7 @@
   table.table tr td:nth-last-of-type(3) {
     width: 200px;
   }
-  
+
   table.table th i {
     font-size: 13px;
     margin: 0 5px;
@@ -91,7 +91,7 @@
   }
 
   table.table td a.buy {
-    color:green !important;
+    color: green !important;
   }
 
   table.table td a.received {
@@ -181,17 +181,24 @@
       const buyProduct = async () => {
         const batchNumber = $(this).parents("tr").find("td").eq(4).text();
         const price = $(this).parents("tr").find("td").eq(6).text();
+
+        // Convert price from ether to wei
+        const priceWei = window.web3.utils.toWei(price, "ether");
+
+
         try {
-          await window.contract.methods.buyFromFarmer(batchNumber, price).send({ from: account });
+          await window.contract.methods.buyFromFarmer(batchNumber, price).send({ from: account, value: priceWei });
           location.reload();
         } catch (error) {
           console.error(error);
           alert("Transaction failed");
           return;
         }
-      }
-      buyProduct();// Call addProduct function to send data to the smart contract
+      };
+
+      buyProduct();
     });
+
 
     $(document).on("click", ".received", function () {
       const receiveProduct = async () => {
@@ -242,7 +249,7 @@
           }
         }
         updateProduct();// Call addProduct function to send data to the smart contract
-        
+
       }
     });
 
@@ -303,8 +310,8 @@
           ? `<a class="buy" data-toggle="tooltip" title="buy"><i class="material-icons"><span class="material-symbols-outlined">shopping_cart_checkout</span></i></a>`
           : distributor.toLowerCase() === distAddresss.toLowerCase() && distReceiveDate === '0'
             ? `<a class="received" title="order received" data-toggle="tooltip"><i class="material-icons"><span class="material-symbols-outlined">local_shipping</span></i></a>`
-            : distributor.toLowerCase() === ownerAddress.toLowerCase() && distributor.toLowerCase()!==consumer.toLowerCase()
-            ? `<a class="edit" data-toggle="tooltip" title="edit"><i class="material-icons">&#xE254;</i></a>`:``
+            : distributor.toLowerCase() === ownerAddress.toLowerCase() && distributor.toLowerCase() !== consumer.toLowerCase()
+              ? `<a class="edit" data-toggle="tooltip" title="edit"><i class="material-icons">&#xE254;</i></a>` : ``
         }
         <a class="save" title="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
       </td>

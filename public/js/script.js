@@ -2,127 +2,6 @@ window.addEventListener('load', async function () {
 
     const ABI = [
         {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_price",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_category",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_tree",
-                    "type": "string"
-                }
-            ],
-            "name": "addProduct",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_expectedPrice",
-                    "type": "uint256"
-                }
-            ],
-            "name": "buyFromDistributor",
-            "outputs": [],
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_amount",
-                    "type": "uint256"
-                }
-            ],
-            "name": "buyFromFarmer",
-            "outputs": [],
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                }
-            ],
-            "name": "buyProduct",
-            "outputs": [],
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                }
-            ],
-            "name": "confirmReceivedFromDistributor",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                }
-            ],
-            "name": "confirmReceivedFromRetailer",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_comment",
-                    "type": "string"
-                }
-            ],
-            "name": "leaveComment",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
             "inputs": [],
             "stateMutability": "nonpayable",
             "type": "constructor"
@@ -203,32 +82,6 @@ window.addEventListener('load', async function () {
             "type": "event"
         },
         {
-            "inputs": [
-                {
-                    "internalType": "address",
-                    "name": "_distributor",
-                    "type": "address"
-                }
-            ],
-            "name": "setDistributor",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "address",
-                    "name": "_retailer",
-                    "type": "address"
-                }
-            ],
-            "name": "setRetailer",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
             "anonymous": false,
             "inputs": [
                 {
@@ -262,11 +115,21 @@ window.addEventListener('load', async function () {
                 },
                 {
                     "internalType": "uint256",
-                    "name": "_newPrice",
+                    "name": "_price",
                     "type": "uint256"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_category",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_tree",
+                    "type": "string"
                 }
             ],
-            "name": "updatePriceD",
+            "name": "addProduct",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -280,11 +143,63 @@ window.addEventListener('load', async function () {
                 },
                 {
                     "internalType": "uint256",
-                    "name": "_newPrice",
+                    "name": "_expectedPrice",
                     "type": "uint256"
                 }
             ],
-            "name": "updatePriceR",
+            "name": "buyFromDistributor",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                }
+            ],
+            "name": "buyFromFarmer",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                }
+            ],
+            "name": "buyProduct",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                }
+            ],
+            "name": "confirmReceivedFromDistributor",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                }
+            ],
+            "name": "confirmReceivedFromRetailer",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -358,6 +273,24 @@ window.addEventListener('load', async function () {
                 }
             ],
             "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_comment",
+                    "type": "string"
+                }
+            ],
+            "name": "leaveComment",
+            "outputs": [],
+            "stateMutability": "nonpayable",
             "type": "function"
         },
         {
@@ -465,10 +398,72 @@ window.addEventListener('load', async function () {
             ],
             "stateMutability": "view",
             "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_distributor",
+                    "type": "address"
+                }
+            ],
+            "name": "setDistributor",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_retailer",
+                    "type": "address"
+                }
+            ],
+            "name": "setRetailer",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_newPrice",
+                    "type": "uint256"
+                }
+            ],
+            "name": "updatePriceD",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_newPrice",
+                    "type": "uint256"
+                }
+            ],
+            "name": "updatePriceR",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
         }
     ];
 
-    const Address = "0xB709F39C7989bDaA78CbD483e87426fb468EacD7";
+    const Address = "0xCB674DBf0d0441D0D1D9d85145429D84557FD026";
     window.web3 = await new Web3(window.ethereum); //how to access to smart contract 
     window.contract = await new window.web3.eth.Contract(ABI, Address); //how you create an instance of that contract by using the abi and address  
 });
