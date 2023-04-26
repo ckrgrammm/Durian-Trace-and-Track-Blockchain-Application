@@ -64,6 +64,11 @@
     word-wrap: break-word;
   }
 
+  table.table tr th:nth-last-of-type(3),
+  table.table tr td:nth-last-of-type(3) {
+    width: 200px;
+  }
+  
   table.table th i {
     font-size: 13px;
     margin: 0 5px;
@@ -81,25 +86,28 @@
     min-width: 24px;
   }
 
-  table.table td a.add,
   table.table td a.save {
     color: #27C46B !important;
+  }
+
+  table.table td a.buy {
+    color:green !important;
+  }
+
+  table.table td a.received {
+    color: grey !important;
   }
 
   table.table td a.edit {
     color: #FFC107 !important;
   }
 
-  table.table td a.delete {
-    color: #E34724 !important;
-  }
 
   table.table td i {
     font-size: 19px;
   }
 
-  table.table td a.add i,
-  table.table td a.save i {
+  table.table td a.buy i {
     font-size: 24px;
     margin-right: -1px;
     position: relative;
@@ -117,7 +125,6 @@
     border-color: #f50000;
   }
 
-  table.table td .add,
   table.table td .save {
     display: none;
   }
@@ -219,16 +226,15 @@
       $(this).parents("tr").find(".error").first().focus();
       if (!empty) {
         const updateProduct = async () => {
-          const batchNumber = input.eq(0).val();
-          const price = input.eq(1).val();
+          const batchNumber = $(this).parents("tr").find("td").eq(4).text();
+          const price = input.eq(0).val();
           try {
             await window.contract.methods.updatePriceD(batchNumber, price).send({ from: account });
             input.each(function () {
               $(this).parent("td").html($(this).val());
             });
-
-            $(".add-new").removeAttr("disabled");
-            location.reload();
+            $(this).parents("tr").find("td").css("background-color", "");
+            $(this).parents("tr").find(".save, .edit").toggle();
           } catch (error) {
             console.error(error);
             alert("Transaction failed");
@@ -243,12 +249,10 @@
 
     // Edit row on edit button click
     $(document).on("click", ".edit", function () {
-      $(this).parents("tr").find("td:nth-last-of-type(7),td:nth-last-of-type(9)").each(function () {
-        $(this).html('<input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" value="' + $(this).text() + '">');
-        if ($(this).is(':nth-last-of-type(9)')) {
-          $(this).find('input').prop('disabled', true);
-        }
+      $(this).parents("tr").find("td:nth-last-of-type(7)").each(function () {
+        $(this).html('<input type="text" class="form-control" style="background-color:white" value="' + $(this).text() + '">');
       });
+      $(this).parents("tr").find("td").css("background-color", "#ffd9b3");
       $(this).parents("tr").find(".save, .edit").toggle();
     });
 
@@ -296,10 +300,10 @@
         <td>${tree}</td>
         <td>
         ${distributor === "0x0000000000000000000000000000000000000000"
-          ? `<a class="buy" data-toggle="tooltip" title="buy" style="color:green !important"><i class="material-icons"><span class="material-symbols-outlined">shopping_cart_checkout</span></i></a>`
+          ? `<a class="buy" data-toggle="tooltip" title="buy"><i class="material-icons"><span class="material-symbols-outlined">shopping_cart_checkout</span></i></a>`
           : distributor.toLowerCase() === distAddresss.toLowerCase() && distReceiveDate === '0'
-            ? `<a class="received" title="order received" data-toggle="tooltip" style="color:grey !important"><i class="material-icons"><span class="material-symbols-outlined">local_shipping</span></i></a>`
-            : distributor.toLowerCase() === ownerAddress.toLowerCase()
+            ? `<a class="received" title="order received" data-toggle="tooltip"><i class="material-icons"><span class="material-symbols-outlined">local_shipping</span></i></a>`
+            : distributor.toLowerCase() === ownerAddress.toLowerCase() && distributor.toLowerCase()!==consumer.toLowerCase()
             ? `<a class="edit" data-toggle="tooltip" title="edit"><i class="material-icons">&#xE254;</i></a>`:``
         }
         <a class="save" title="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>

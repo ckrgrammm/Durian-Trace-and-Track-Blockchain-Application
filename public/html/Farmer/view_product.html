@@ -74,6 +74,11 @@
     width: 100px;
     word-wrap: break-word;
   }
+  
+  table.table tr th:nth-last-of-type(3),
+  table.table tr td:nth-last-of-type(3) {
+    width: 200px;
+  }
 
   table.table th i {
     font-size: 13px;
@@ -239,7 +244,6 @@
 
             $(this).parents("tr").find(".add, .edit").toggle();
             $(".add-new").removeAttr("disabled");
-            location.reload();
           } catch (error) {
             console.error(error);
             alert("Transaction failed");
@@ -336,6 +340,7 @@
         <td>
           <a class="add" title="add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
           <a class="save" title="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+          
           <a class="edit" title="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
           <a class="delete" title="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
         </td>
