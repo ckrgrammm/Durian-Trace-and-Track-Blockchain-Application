@@ -176,7 +176,6 @@
         const price = $(this).parents("tr").find("td").eq(6).text();
         try {
           await window.contract.methods.buyFromFarmer(batchNumber, price).send({ from: account });
-          $(this).parents("tr").find(".save, .edit").toggle();
           location.reload();
         } catch (error) {
           console.error(error);
@@ -192,7 +191,6 @@
         const batchNumber = $(this).parents("tr").find("td").eq(4).text();
         try {
           await window.contract.methods.confirmReceivedFromDistributor(batchNumber).send({ from: account });
-          $(this).parents("tr").find(".save, .edit").toggle();
           location.reload();
         } catch (error) {
           console.error(error);
@@ -229,7 +227,6 @@
               $(this).parent("td").html($(this).val());
             });
 
-            $(this).parents("tr").find(".add, .edit").toggle();
             $(".add-new").removeAttr("disabled");
             location.reload();
           } catch (error) {
