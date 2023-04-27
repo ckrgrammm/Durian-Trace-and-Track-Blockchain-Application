@@ -43,8 +43,7 @@ contract DTTBA {
     mapping(string => Product) public products;
     string[] public productAll;
 
-    function getAllProduct(
-     ) view public returns (string[] memory) {
+    function getAllProduct() public view returns (string[] memory) {
         return productAll;
     }
 
@@ -96,7 +95,6 @@ contract DTTBA {
         uint256 _price,
         string memory _category,
         string memory _tree
-
     ) public {
         require(
             products[_batchNumber].farmer == address(0),
@@ -124,37 +122,69 @@ contract DTTBA {
             distributorReceivedDate: 0,
             retailerReceivedDate: 0,
             comment: ""
-            
         });
-            productAll.push(_batchNumber);
+        productAll.push(_batchNumber);
+    }
+
+    function editProduct(
+        string memory _batchNumber,
+        uint256 _price,
+        string memory _category,
+        string memory _tree
+    ) public {
+        require(
+            products[_batchNumber].farmer == msg.sender,
+            "Only farmer can edit product"
+        );
+
+        products[_batchNumber].price = _price;
+        products[_batchNumber].category = _category;
+        products[_batchNumber].tree = _tree;
     }
 
     //Distributor Buy from Farmer
-function buyFromFarmer(string memory _batchNumber) public payable onlyDistributor {
-    require(products[_batchNumber].farmer != address(0), "Product does not exist");
-    require(products[_batchNumber].distributor == address(0), "Product already sold");
-    require(msg.sender != products[_batchNumber].farmer, "Farmers are not allowed to buy their own product");
+    function buyFromFarmer(
+        string memory _batchNumber
+    ) public payable onlyDistributor {
+        require(
+            products[_batchNumber].farmer != address(0),
+            "Product does not exist"
+        );
+        require(
+            products[_batchNumber].distributor == address(0),
+            "Product already sold"
+        );
+        require(
+            msg.sender != products[_batchNumber].farmer,
+            "Farmers are not allowed to buy their own product"
+        );
 
-    uint256 price = products[_batchNumber].price;
+        uint256 price = products[_batchNumber].price;
 
-    require(msg.value >= price, "Insufficient payment for full price of product");
+        require(
+            msg.value >= price,
+            "Insufficient payment for full price of product"
+        );
 
-    // Set distributor as the new owner of the product
-    products[_batchNumber].distributor = msg.sender;
+        // Set distributor as the new owner of the product
+        products[_batchNumber].distributor = msg.sender;
 
-    emit TransferOwnership(_batchNumber, products[_batchNumber].farmer, msg.sender);
+        emit TransferOwnership(
+            _batchNumber,
+            products[_batchNumber].farmer,
+            msg.sender
+        );
 
-    // Send payment to farmer
-    address payable farmerAddress = payable(products[_batchNumber].farmer);
-    farmerAddress.transfer(msg.value);
-    emit PaymentToAddress(farmerAddress, msg.value);
+        // Send payment to farmer
+        address payable farmerAddress = payable(products[_batchNumber].farmer);
+        farmerAddress.transfer(msg.value);
+        emit PaymentToAddress(farmerAddress, msg.value);
+    }
 
-}
-
-    function updatePriceD(string memory _batchNumber, uint256 _newPrice)
-        public
-        onlyDistributor
-    {
+    function updatePriceD(
+        string memory _batchNumber,
+        uint256 _newPrice
+    ) public onlyDistributor {
         require(
             products[_batchNumber].distributor == msg.sender,
             "You do not have ownership of this product"
@@ -166,11 +196,9 @@ function buyFromFarmer(string memory _batchNumber) public payable onlyDistributo
         emit PriceUpdated(_batchNumber, _newPrice);
     }
 
-       function buyFromDistributor(string memory _batchNumber)
-        public
-        payable
-        onlyRetailer
-    {
+    function buyFromDistributor(
+        string memory _batchNumber
+    ) public payable onlyRetailer {
         require(
             products[_batchNumber].distributor != address(0),
             "Product is not available yet"
@@ -183,14 +211,19 @@ function buyFromFarmer(string memory _batchNumber) public payable onlyDistributo
             msg.sender != products[_batchNumber].distributor,
             "Distributors are not allowed to buy their own product"
         );
-        require(msg.value >= products[_batchNumber].price, "Insufficient payment");
+        require(
+            msg.value >= products[_batchNumber].price,
+            "Insufficient payment"
+        );
 
         Product storage product = products[_batchNumber];
 
         uint256 price = products[_batchNumber].price;
 
-        require(msg.value >= price, "Insufficient payment for full price of product");
-
+        require(
+            msg.value >= price,
+            "Insufficient payment for full price of product"
+        );
 
         product.retailer = msg.sender;
         product.date = block.timestamp;
@@ -198,15 +231,17 @@ function buyFromFarmer(string memory _batchNumber) public payable onlyDistributo
         emit TransferOwnership(_batchNumber, product.distributor, msg.sender);
 
         // Send payment to distributor
-        address payable distributorAddress = payable(products[_batchNumber].distributor);
+        address payable distributorAddress = payable(
+            products[_batchNumber].distributor
+        );
         distributorAddress.transfer(msg.value);
         emit PaymentToAddress(distributorAddress, msg.value);
     }
 
-    function updatePriceR(string memory _batchNumber, uint256 _newPrice)
-        public
-        onlyRetailer
-    {
+    function updatePriceR(
+        string memory _batchNumber,
+        uint256 _newPrice
+    ) public onlyRetailer {
         require(
             products[_batchNumber].retailer == msg.sender,
             "You don't own this product"
@@ -245,18 +280,20 @@ function buyFromFarmer(string memory _batchNumber) public payable onlyDistributo
 
         product.consumer = msg.sender;
 
-
         emit TransferOwnership(_batchNumber, product.retailer, msg.sender);
 
         // Send payment to distributor
-        address payable retailerAddress = payable(products[_batchNumber].retailer);
+        address payable retailerAddress = payable(
+            products[_batchNumber].retailer
+        );
         retailerAddress.transfer(msg.value);
         emit PaymentToAddress(retailerAddress, msg.value);
     }
 
-    function leaveComment(string memory _batchNumber, string memory _comment)
-        public
-    {
+    function leaveComment(
+        string memory _batchNumber,
+        string memory _comment
+    ) public {
         require(
             products[_batchNumber].consumer == msg.sender,
             "Only the consumer who purchased this product can leave a comment"
@@ -276,10 +313,9 @@ function buyFromFarmer(string memory _batchNumber) public payable onlyDistributo
         );
     }
 
-    function confirmReceivedFromDistributor(string memory _batchNumber)
-        public
-        onlyDistributor
-    {
+    function confirmReceivedFromDistributor(
+        string memory _batchNumber
+    ) public onlyDistributor {
         require(
             products[_batchNumber].distributor == msg.sender,
             "Only the distributor who purchased this product can confirm receipt"
@@ -292,10 +328,9 @@ function buyFromFarmer(string memory _batchNumber) public payable onlyDistributo
         products[_batchNumber].distributorReceivedDate = block.timestamp;
     }
 
-    function confirmReceivedFromRetailer(string memory _batchNumber)
-        public
-        onlyRetailer
-    {
+    function confirmReceivedFromRetailer(
+        string memory _batchNumber
+    ) public onlyRetailer {
         require(
             products[_batchNumber].retailer == msg.sender,
             "Only the retailer who purchased this product can confirm receipt"
@@ -309,11 +344,9 @@ function buyFromFarmer(string memory _batchNumber) public payable onlyDistributo
     }
 
     //Trace Current Owner
-    function getCurrentOwner(string memory _batchNumber)
-        public
-        view
-        returns (address)
-    {
+    function getCurrentOwner(
+        string memory _batchNumber
+    ) public view returns (address) {
         require(
             products[_batchNumber].farmer != address(0),
             "Product does not exist"
