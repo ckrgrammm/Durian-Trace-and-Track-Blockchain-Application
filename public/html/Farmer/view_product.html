@@ -295,18 +295,27 @@
           const price = input.eq(0).val();
           const category = input.eq(1).val();
           const tree = input.eq(2).val();
-          try {
-            await window.contract.methods.editProduct(batchNumber, price, category, tree).send({ from: account });
-            input.each(function () {
-              $(this).parent("td").html($(this).val());
-            });
-            $(this).parents("tr").find("td").css("background-color", "");
-            $(".add-new").removeAttr("disabled");
-            $(this).parents("tr").find(".save, .edit").toggle();
-          } catch (error) {
-            console.error(error);
-            alert("Transaction failed");
-            return;
+          const product = await contract.methods.products(batchNumber).call();
+          const prePrice = product.price;
+          const preCate = product.category;
+          const preTree = product.tree;
+          if (price !== prePrice || category !== preCate || tree !== preTree) {
+            try {
+              await window.contract.methods.editProduct(batchNumber, category, tree, price).send({ from: account });
+              input.each(function () {
+                $(this).parent("td").html($(this).val());
+              });
+              $(this).parents("tr").find("td").css("background-color", "");
+              $(".add-new").removeAttr("disabled");
+              $(this).parents("tr").find(".save, .edit").toggle();
+            } catch (error) {
+              console.error(error);
+              alert("Transaction failed");
+              return;
+            }
+          }else{
+            alert("All data is same as previous");
+            return
           }
         }
         updateProduct();// Call addProduct function to send data to the smart contract

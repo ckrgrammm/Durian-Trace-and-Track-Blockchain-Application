@@ -60,6 +60,9 @@ contract DTTBA {
     );
 
     event PriceUpdated(string indexed batchNumber, uint256 newPrice);
+    event CategoryUpdated(string indexed batchNumber, string newCategory);
+    event TreeUpdated(string indexed batchNumber, string newTree);
+
     event CommentSubmitted(
         string indexed batchNumber,
         address indexed user,
@@ -128,18 +131,40 @@ contract DTTBA {
 
     function editProduct(
         string memory _batchNumber,
-        uint256 _price,
-        string memory _category,
-        string memory _tree
-    ) public {
+        string memory _newCategory,
+        string memory _newTree,
+        uint256 _newPrice
+
+    ) public onlyFarmer{
         require(
             products[_batchNumber].farmer == msg.sender,
-            "Only farmer can edit product"
+            "You do not have ownership of this product"
         );
+        require(
+            products[_batchNumber].distributor == address(0),
+            "Product has already been sold and cannot be edited"
+        );
+        require(
+            products[_batchNumber].retailer == address(0),
+            "Product has already been sold and cannot be edited"
+        );
+        require(_newPrice > 0, "Price must be greater than 0");
+        require(
+            keccak256(abi.encodePacked(products[_batchNumber].category)) !=
+            keccak256(abi.encodePacked(_newCategory)) ||
+            keccak256(abi.encodePacked(products[_batchNumber].tree)) !=
+            keccak256(abi.encodePacked(_newTree)) ||
+            keccak256(abi.encodePacked(products[_batchNumber].price)) !=
+            keccak256(abi.encodePacked(_newPrice)),
+            "All details are the same as the previous details"
+        );
+        products[_batchNumber].price = _newPrice;
+        products[_batchNumber].category = _newCategory;
+        products[_batchNumber].tree = _newTree;
 
-        products[_batchNumber].price = _price;
-        products[_batchNumber].category = _category;
-        products[_batchNumber].tree = _tree;
+        emit PriceUpdated(_batchNumber, _newPrice);
+        emit CategoryUpdated(_batchNumber, _newCategory);
+        emit TreeUpdated(_batchNumber, _newTree);
     }
 
     //Distributor Buy from Farmer

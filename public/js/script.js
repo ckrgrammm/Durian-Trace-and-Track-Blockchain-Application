@@ -16,6 +16,25 @@ window.addEventListener('load', async function () {
                     "type": "string"
                 },
                 {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "newCategory",
+                    "type": "string"
+                }
+            ],
+            "name": "CategoryUpdated",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "string",
+                    "name": "batchNumber",
+                    "type": "string"
+                },
+                {
                     "indexed": true,
                     "internalType": "address",
                     "name": "user",
@@ -123,6 +142,25 @@ window.addEventListener('load', async function () {
                 }
             ],
             "name": "TransferOwnership",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "string",
+                    "name": "batchNumber",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "newTree",
+                    "type": "string"
+                }
+            ],
+            "name": "TreeUpdated",
             "type": "event"
         },
         {
@@ -252,19 +290,19 @@ window.addEventListener('load', async function () {
                     "type": "string"
                 },
                 {
+                    "internalType": "string",
+                    "name": "_newCategory",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_newTree",
+                    "type": "string"
+                },
+                {
                     "internalType": "uint256",
-                    "name": "_price",
+                    "name": "_newPrice",
                     "type": "uint256"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_category",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_tree",
-                    "type": "string"
                 }
             ],
             "name": "editProduct",
@@ -505,7 +543,7 @@ window.addEventListener('load', async function () {
         }
     ];
 
-    const Address = "0x06a18551741D07309F666b519b5506ca6Cb367Ac";
+    const Address = "0x69Eb158514357076D633f0239e91Aa6e913cE42d";
     window.web3 = await new Web3(window.ethereum); //how to access to smart contract 
     window.contract = await new window.web3.eth.Contract(ABI, Address); //how you create an instance of that contract by using the abi and address  
 });
