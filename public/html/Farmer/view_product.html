@@ -197,14 +197,14 @@
         '<td></td>' +
         '<td></td>' +
         '<td></td>' +
-        '<td><input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" name="batch_no" id="batch_no"></td>' +
+        '<td><input type="text" class="form-control" style="background-color:#ffff66" name="batch_no" id="batch_no"></td>' +
         '<td></td>' +
-        '<td><input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" name="price" id="price"></td>' +
-        '<td><input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" name="category" id="category"></td>' +
+        '<td><input type="text" class="form-control" style="background-color:#ffff66" name="price" id="price"></td>' +
+        '<td><input type="text" class="form-control" style="background-color:#ffff66" name="category" id="category"></td>' +
         '<td></td>' +
         '<td></td>' +
         '<td></td>' +
-        '<td><input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" name="tree" id="tree"></td>' +
+        '<td><input type="text" class="form-control" style="background-color:#ffff66" name="tree" id="tree"></td>' +
         '<td><a class="add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
         '<a class="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
         '<a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
@@ -240,6 +240,27 @@
               $(this).parent("td").html($(this).val());
             });
 
+
+            // Get the values and set the <td> elements
+            const product = await contract.methods.products(_batchNumber).call();
+            const farmer = product.farmer;
+            const distributor = product.distributor;
+            const retailer = product.retailer;
+            const consumer = product.consumer;
+            const date = product.date;
+            const distReceiveDate = product.distributorReceivedDate;
+            const retailerReceiveDate = product.retailerReceivedDate;
+            const comment = product.comment;
+
+            $(this).parents("tr").find("td:nth-child(1)").html(farmer);
+            $(this).parents("tr").find("td:nth-child(2)").html(distributor);
+            $(this).parents("tr").find("td:nth-child(3)").html(retailer);
+            $(this).parents("tr").find("td:nth-child(4)").html(consumer);
+            $(this).parents("tr").find("td:nth-child(6)").html(date);
+            $(this).parents("tr").find("td:nth-child(9)").html(distReceiveDate);
+            $(this).parents("tr").find("td:nth-child(10)").html(retailerReceiveDate);
+            $(this).parents("tr").find("td:nth-child(11)").html(comment);
+
             $(this).parents("tr").find(".add, .edit").toggle();
             $(".add-new").removeAttr("disabled");
           } catch (error) {
@@ -249,7 +270,6 @@
           }
         }
         addProduct();// Call addProduct function to send data to the smart contract
-
       }
 
     });
