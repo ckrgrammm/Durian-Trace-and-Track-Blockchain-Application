@@ -64,8 +64,10 @@
 
   table.table {
     table-layout: fixed;
-    overflow: scroll; /* Scrollbar are always visible */
-    overflow: auto;   /* Scrollbar is displayed as it's needed */
+    overflow: scroll;
+    /* Scrollbar are always visible */
+    overflow: auto;
+    /* Scrollbar is displayed as it's needed */
   }
 
   table.table tr th,
@@ -74,7 +76,7 @@
     width: 100px;
     word-wrap: break-word;
   }
-  
+
   table.table tr th:nth-last-of-type(3),
   table.table tr td:nth-last-of-type(3) {
     width: 200px;
@@ -106,9 +108,6 @@
     color: #FFC107 !important;
   }
 
-  table.table td a.delete {
-    color: #E34724 !important;
-  }
 
   table.table td i {
     font-size: 19px;
@@ -206,10 +205,9 @@
         '<td></td>' +
         '<td></td>' +
         '<td><input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" name="tree" id="tree"></td>' +
-        '<td><a class="add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>'+
-                '<a class="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>'+
-                '<a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>'+
-                '<a class="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>' +
+        '<td><a class="add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
+        '<a class="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
+        '<a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
         '</tr>';
       $("table").append(row);
       $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
@@ -237,7 +235,7 @@
           const category = input.eq(2).val();
           const tree = input.eq(3).val();
           try {
-            await window.contract.methods.addProduct(_batchNumber, price,category,tree).send({ from: account });
+            await window.contract.methods.addProduct(_batchNumber, price, category, tree).send({ from: account });
             input.each(function () {
               $(this).parent("td").html($(this).val());
             });
@@ -251,7 +249,7 @@
           }
         }
         addProduct();// Call addProduct function to send data to the smart contract
-        
+
       }
 
     });
@@ -268,34 +266,41 @@
         } else {
           $(this).removeClass("error");
         }
-
       });
 
       $(this).parents("tr").find(".error").first().focus();
       if (!empty) {
-        input.each(function () {
-          $(this).parent("td").html($(this).val());
-        });
-        $(this).parents("tr").find(".save, .edit").toggle();
-        $(".add-new").removeAttr("disabled");
+        const updateProduct = async () => {
+          const batchNumber = $(this).parents("tr").find("td").eq(4).text();
+          const price = input.eq(0).val();
+          const category = input.eq(1).val();
+          const tree = input.eq(2).val();
+          try {
+            await window.contract.methods.editProduct(batchNumber, price, category, tree).send({ from: account });
+            input.each(function () {
+              $(this).parent("td").html($(this).val());
+            });
+            $(this).parents("tr").find("td").css("background-color", "");
+            $(".add-new").removeAttr("disabled");
+            $(this).parents("tr").find(".save, .edit").toggle();
+          } catch (error) {
+            console.error(error);
+            alert("Transaction failed");
+            return;
+          }
+        }
+        updateProduct();// Call addProduct function to send data to the smart contract
       }
     });
 
-
-    // Edit row on edit button click
     $(document).on("click", ".edit", function () {
-      $(this).parents("tr").find("td:nth-last-of-type(2),td:nth-last-of-type(3)").each(function () {
-        $(this).html('<input type="text" class="form-control" style="background-color:rgb(255, 208, 0)" value="' + $(this).text() + '">');
+      $(this).parents("tr").find("td:nth-last-of-type(7),td:nth-last-of-type(6),td:nth-last-of-type(2)").each(function () {
+        $(this).html('<input type="text" class="form-control" style="background-color:white" value="' + $(this).text() + '">');
       });
+      $(this).parents("tr").find("td").css("background-color", "#ffd9b3");
       $(this).parents("tr").find(".save, .edit").toggle();
-      $(".add-new").attr("disabled", "disabled");
     });
 
-    // Delete row on delete button click
-    $(document).on("click", ".delete", function () {
-      $(this).parents("tr").remove();
-      $(".add-new").removeAttr("disabled");
-    });
   });
 </script>
 
@@ -309,6 +314,7 @@
     const productTableBody = document.getElementById('productTableBody');
 
     productsArray.forEach(async (batchNumber) => {
+      const ownerAddress = await contract.methods.getCurrentOwner(batchNumber).call();
       const product = await contract.methods.products(batchNumber).call();
       const farmer = product.farmer;
       const distributor = product.distributor;
@@ -338,17 +344,17 @@
         <td>${comment}</td>
         <td>${tree}</td>
         <td>
+        ${farmer.toLowerCase() === ownerAddress.toLowerCase()
+          ? `<a class="edit" title="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>` : ``
+        }
           <a class="add" title="add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
           <a class="save" title="save" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-          
-          <a class="edit" title="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-          <a class="delete" title="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
         </td>
       `;
 
-        if(batchNumber!=""){
+      if (batchNumber != "") {
         productTableBody.appendChild(newRow);
-        }
+      }
     });
   });
 </script>
