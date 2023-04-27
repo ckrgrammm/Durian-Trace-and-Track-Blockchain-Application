@@ -60,12 +60,30 @@ contract DTTBA {
     );
 
     event PriceUpdated(string indexed batchNumber, uint256 newPrice);
+    event CategoryUpdated(string indexed batchNumber, string newCategory);
+    event TreeUpdated(string indexed batchNumber, string newTree);
     event CommentSubmitted(
         string indexed batchNumber,
         address indexed user,
         string comment,
         uint256 timestamp
     );
+
+        modifier onlyFarmerAndOwner(string memory _batchNumber) {
+        require(
+            products[_batchNumber].farmer == msg.sender,
+            "Only the farmer can perform this action"
+        );
+        require(
+            products[_batchNumber].distributor != address(0),
+            "This product does not exist"
+        );
+        require(
+            products[_batchNumber].distributor == msg.sender,
+            "You do not have ownership of this product"
+        );
+        _;
+    }
 
     modifier onlyFarmer() {
         require(msg.sender == farmer, "Only Farmer can perform this action");
@@ -126,20 +144,37 @@ contract DTTBA {
         productAll.push(_batchNumber);
     }
 
-    function editProduct(
+   function editProduct(
         string memory _batchNumber,
-        uint256 _price,
-        string memory _category,
-        string memory _tree
-    ) public {
+        uint256 _newPrice,
+        string memory _newCategory,
+        string memory _newTree
+    ) public onlyFarmerAndOwner(_batchNumber) {
+        //require(_newPrice > 0, "Price must be greater than 0");
         require(
-            products[_batchNumber].farmer == msg.sender,
-            "Only farmer can edit product"
+            keccak256(abi.encodePacked(products[_batchNumber].price)) !=
+                keccak256(abi.encodePacked(_newPrice)),
+            "Cannot be the same as the previous details"
+        );
+        require(
+            keccak256(abi.encodePacked(products[_batchNumber].category)) !=
+                keccak256(abi.encodePacked(_newCategory)),
+            "Cannot be the same as the previous details"
         );
 
-        products[_batchNumber].price = _price;
-        products[_batchNumber].category = _category;
-        products[_batchNumber].tree = _tree;
+        require(
+            keccak256(abi.encodePacked(products[_batchNumber].tree)) !=
+                keccak256(abi.encodePacked(_newTree)),
+            "Cannot be the same as the previous details"
+        );
+
+        products[_batchNumber].price = _newPrice;
+        products[_batchNumber].category = _newCategory;
+        products[_batchNumber].tree = _newTree;
+
+        emit PriceUpdated(_batchNumber, _newPrice);
+        emit CategoryUpdated(_batchNumber, _newCategory);
+        emit TreeUpdated(_batchNumber, _newTree);
     }
 
     //Distributor Buy from Farmer
