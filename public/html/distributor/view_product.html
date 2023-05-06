@@ -234,6 +234,14 @@
         const updateProduct = async () => {
           const batchNumber = $(this).parents("tr").find("td").eq(4).text();
           const price = input.eq(0).val();
+
+
+          const product = await contract.methods.products(batchNumber).call();
+            if (price === product.price) {
+              alert('Price are same as previous.');
+              throw new Error('Price are same as previous.');
+            }
+
           try {
             await window.contract.methods.updatePriceD(batchNumber, price).send({ from: account });
             input.each(function () {
