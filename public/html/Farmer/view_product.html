@@ -234,12 +234,19 @@
           const price = input.eq(1).val();
           const category = input.eq(2).val();
           const tree = input.eq(3).val();
+          const productsString = await contract.methods.getAllProduct().call();
+          for (let i = 0; i < productsString.length; i++) {
+            if (productsString[i] === _batchNumber) {
+              alert('Batch number already exists!');
+              throw new Error('Batch number already exists!');
+            }
+          }
+          
           try {
             await window.contract.methods.addProduct(_batchNumber, price, category, tree).send({ from: account });
             input.each(function () {
               $(this).parent("td").html($(this).val());
             });
-
 
             // Get the values and set the <td> elements
             const product = await contract.methods.products(_batchNumber).call();
@@ -338,11 +345,9 @@
   window.addEventListener('load', async function () {
     account = await checkFarmerAddress();
     const products = await contract.methods.getAllProduct().call();
-    const productListString = products.join(', ');
-    const productsArray = productListString.split(', ');
     const productTableBody = document.getElementById('productTableBody');
 
-    productsArray.forEach(async (batchNumber) => {
+    products.forEach(async (batchNumber) => {
       const ownerAddress = await contract.methods.getCurrentOwner(batchNumber).call();
       const product = await contract.methods.products(batchNumber).call();
       const farmer = product.farmer;
