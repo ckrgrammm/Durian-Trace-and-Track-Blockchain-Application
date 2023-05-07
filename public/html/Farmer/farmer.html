@@ -198,6 +198,11 @@
   const setDistributor = async () => {
     const Distributor = document.getElementById("distributor").value;
     try {
+      const retailerAccount = await contract.methods.retailer().call();
+      if (retailerAccount === Distributor) {
+          alert('Distributor and Retailer Account cannot be same');
+          throw new Error('Distributor and Retailer Account cannot be same');
+      }
       await window.contract.methods.setDistributor(Distributor).send({ from: account });
       document.getElementById("distributor").value = "";
       // Set the success message to green
@@ -220,6 +225,11 @@
   const setRetailer = async () => {
     const Retailer = document.getElementById("retailer").value;
     try {
+      const distributorAccount = await contract.methods.distributor().call();
+      if (distributorAccount === Retailer) {
+          alert('Distributor and Retailer Account cannot be same');
+          throw new Error('Distributor and Retailer Account cannot be same');
+      }
       await window.contract.methods.setRetailer(Retailer).send({ from: account });
       document.getElementById("retailer").value = "";
       // Set the success message to green

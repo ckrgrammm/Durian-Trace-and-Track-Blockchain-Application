@@ -543,7 +543,7 @@ window.addEventListener('load', async function () {
         }
     ];
 
-    const Address = "0x4aDF04BF15615E959D33DA64a44A396A3F2FE5b5";
+    const Address = "0xe12f0997b45d0Fd74578Fd9750Cc2C115762478A";
     window.web3 = await new Web3(window.ethereum); //how to access to smart contract 
     window.contract = await new window.web3.eth.Contract(ABI, Address); //how you create an instance of that contract by using the abi and address  
 });
