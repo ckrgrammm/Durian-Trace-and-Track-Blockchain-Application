@@ -215,7 +215,7 @@ contract DTTBA {
             "You do not have ownership of this product"
         );
         require(_newPrice > 0, "Price must be greater than 0");
-
+        require(_newPrice != products[_batchNumber].price, "Price must be different as previous.");
         products[_batchNumber].price = _newPrice;
 
         emit PriceUpdated(_batchNumber, _newPrice);
@@ -231,6 +231,10 @@ contract DTTBA {
         require(
             products[_batchNumber].retailer == address(0),
             "Product already bought by a retailer"
+        );
+        require(
+            products[_batchNumber].distributorReceivedDate != 0,
+            "Distributor haven't receive the product"
         );
         require(
             msg.sender != products[_batchNumber].distributor,
@@ -272,7 +276,7 @@ contract DTTBA {
             "You don't own this product"
         );
         require(_newPrice > 0, "Price must be greater than 0");
-
+        require(_newPrice != products[_batchNumber].price, "Price must be different as previous.");
         Product storage product = products[_batchNumber];
 
         product.price = _newPrice;
@@ -296,6 +300,18 @@ contract DTTBA {
         require(
             msg.sender != products[_batchNumber].retailer,
             "Retailers are not allowed to buy their own product"
+        );
+        require(
+            msg.sender != products[_batchNumber].distributor,
+            "Distributor are not allowed to buy product"
+        );
+        require(
+            msg.sender != products[_batchNumber].farmer,
+            "Farmer are not allowed to buy product"
+        );
+        require(
+            products[_batchNumber].retailerReceivedDate != 0,
+            "Retailer haven't receive the product"
         );
 
         uint256 price = products[_batchNumber].price;
