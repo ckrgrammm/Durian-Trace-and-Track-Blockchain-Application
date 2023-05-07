@@ -1,0 +1,20 @@
+1）open ganache click quickstart or open workbench.
+
+2)METAMASK add new GANACHE network. 
+RPC URL: http://localhost:7545
+CHAIN ID: 1337
+CURRENCY SYMBOL: ETH
+
+3)import the at least 4 account to metamask from GANACHE which is Farmer, Distributor, Retailer and Customer (if more than 4 other will become Customer 2 and so on.)
+
+4)copy and paste the DTTABA.sol code to remix ide.
+
+5)set the env to Ganache Provider and Endpoint change to 7545
+
+6)deploy it. (Current account that deploy the code will become Farmer)
+
+7)back to visual studio, type node server.js inside the terminal.
+
+8)open the browser, type http://127.0.0.1:5000/ in the url.
+
+9)use the farmer account click the Farmer at the header, then set the distributor address and retailer address.
