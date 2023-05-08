@@ -2,168 +2,6 @@ window.addEventListener('load', async function () {
 
     const ABI =[
         {
-            "inputs": [],
-            "stateMutability": "nonpayable",
-            "type": "constructor"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": true,
-                    "internalType": "string",
-                    "name": "batchNumber",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "string",
-                    "name": "newCategory",
-                    "type": "string"
-                }
-            ],
-            "name": "CategoryUpdated",
-            "type": "event"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": true,
-                    "internalType": "string",
-                    "name": "batchNumber",
-                    "type": "string"
-                },
-                {
-                    "indexed": true,
-                    "internalType": "address",
-                    "name": "user",
-                    "type": "address"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "string",
-                    "name": "comment",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "uint256",
-                    "name": "timestamp",
-                    "type": "uint256"
-                }
-            ],
-            "name": "CommentSubmitted",
-            "type": "event"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": true,
-                    "internalType": "address",
-                    "name": "receiver",
-                    "type": "address"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "uint256",
-                    "name": "price",
-                    "type": "uint256"
-                }
-            ],
-            "name": "PaymentToAddress",
-            "type": "event"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": true,
-                    "internalType": "string",
-                    "name": "batchNumber",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "uint256",
-                    "name": "newPrice",
-                    "type": "uint256"
-                }
-            ],
-            "name": "PriceUpdated",
-            "type": "event"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": true,
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                },
-                {
-                    "indexed": true,
-                    "internalType": "address",
-                    "name": "_distributor",
-                    "type": "address"
-                },
-                {
-                    "indexed": true,
-                    "internalType": "uint256",
-                    "name": "timestamp",
-                    "type": "uint256"
-                }
-            ],
-            "name": "ProductShipped",
-            "type": "event"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": true,
-                    "internalType": "string",
-                    "name": "batchNumber",
-                    "type": "string"
-                },
-                {
-                    "indexed": true,
-                    "internalType": "address",
-                    "name": "previousOwner",
-                    "type": "address"
-                },
-                {
-                    "indexed": true,
-                    "internalType": "address",
-                    "name": "newOwner",
-                    "type": "address"
-                }
-            ],
-            "name": "TransferOwnership",
-            "type": "event"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": true,
-                    "internalType": "string",
-                    "name": "batchNumber",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "string",
-                    "name": "newTree",
-                    "type": "string"
-                }
-            ],
-            "name": "TreeUpdated",
-            "type": "event"
-        },
-        {
             "inputs": [
                 {
                     "internalType": "string",
@@ -231,6 +69,61 @@ window.addEventListener('load', async function () {
             "type": "function"
         },
         {
+            "inputs": [],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "string",
+                    "name": "batchNumber",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "newCategory",
+                    "type": "string"
+                }
+            ],
+            "name": "CategoryUpdated",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "string",
+                    "name": "batchNumber",
+                    "type": "string"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "comment",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "CommentSubmitted",
+            "type": "event"
+        },
+        {
             "inputs": [
                 {
                     "internalType": "string",
@@ -254,32 +147,6 @@ window.addEventListener('load', async function () {
             "name": "confirmReceivedFromRetailer",
             "outputs": [],
             "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "consumer",
-            "outputs": [
-                {
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "distributor",
-            "outputs": [
-                {
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }
-            ],
-            "stateMutability": "view",
             "type": "function"
         },
         {
@@ -308,6 +175,219 @@ window.addEventListener('load', async function () {
             "name": "editProduct",
             "outputs": [],
             "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_comment",
+                    "type": "string"
+                }
+            ],
+            "name": "leaveComment",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "receiver",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "price",
+                    "type": "uint256"
+                }
+            ],
+            "name": "PaymentToAddress",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "string",
+                    "name": "batchNumber",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "newPrice",
+                    "type": "uint256"
+                }
+            ],
+            "name": "PriceUpdated",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "_distributor",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "uint256",
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "ProductShipped",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_distributor",
+                    "type": "address"
+                }
+            ],
+            "name": "setDistributor",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_retailer",
+                    "type": "address"
+                }
+            ],
+            "name": "setRetailer",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "string",
+                    "name": "batchNumber",
+                    "type": "string"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "previousOwner",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "TransferOwnership",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "string",
+                    "name": "batchNumber",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "newTree",
+                    "type": "string"
+                }
+            ],
+            "name": "TreeUpdated",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_newPrice",
+                    "type": "uint256"
+                }
+            ],
+            "name": "updatePriceD",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_batchNumber",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_newPrice",
+                    "type": "uint256"
+                }
+            ],
+            "name": "updatePriceR",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "consumer",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "distributor",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
             "type": "function"
         },
         {
@@ -353,24 +433,6 @@ window.addEventListener('load', async function () {
                 }
             ],
             "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_comment",
-                    "type": "string"
-                }
-            ],
-            "name": "leaveComment",
-            "outputs": [],
-            "stateMutability": "nonpayable",
             "type": "function"
         },
         {
@@ -478,72 +540,10 @@ window.addEventListener('load', async function () {
             ],
             "stateMutability": "view",
             "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "address",
-                    "name": "_distributor",
-                    "type": "address"
-                }
-            ],
-            "name": "setDistributor",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "address",
-                    "name": "_retailer",
-                    "type": "address"
-                }
-            ],
-            "name": "setRetailer",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_newPrice",
-                    "type": "uint256"
-                }
-            ],
-            "name": "updatePriceD",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_batchNumber",
-                    "type": "string"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "_newPrice",
-                    "type": "uint256"
-                }
-            ],
-            "name": "updatePriceR",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
         }
     ];
 
-    const Address = "0xe12f0997b45d0Fd74578Fd9750Cc2C115762478A";
+    const Address = "0xbb0F7a731e40149C56dC95aE0858Ef409e82a1eC";
     window.web3 = await new Web3(window.ethereum); //how to access to smart contract 
     window.contract = await new window.web3.eth.Contract(ABI, Address); //how you create an instance of that contract by using the abi and address  
 });

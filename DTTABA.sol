@@ -406,11 +406,15 @@ contract DTTBA {
 
     function setDistributor(address _distributor) public onlyFarmer {
         require(_distributor != address(0), "Invalid Distributor address");
+        require(_distributor != retailer, "Distributor address cannot be the same as retailer address.");
+
         distributor = _distributor;
     }
 
     function setRetailer(address _retailer) public onlyFarmer {
         require(_retailer != address(0), "Invalid Retailer address");
+        require(_retailer != distributor, "Retailer address cannot be the same as distributor address.");
+
         retailer = _retailer;
     }
 }
