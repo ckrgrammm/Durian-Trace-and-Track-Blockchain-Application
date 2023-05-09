@@ -122,6 +122,12 @@
   table.table td .post {
     display: none;
   }
+  tr.unassign{
+    background-color: lightgrey;
+  }
+  tr.assign{
+    background-color: #ffd9b3;
+  }
 </style>
 
 <body>
@@ -216,6 +222,8 @@
             await window.contract.methods.leaveComment(batchNumber, comment).send({ from: account });
             $(this).parents("tr").find("textarea").replaceWith(comment);
             $(this).parents("tr").find(".post").toggle();
+            $(this).parents("tr").removeClass("assign");
+            $(this).parents("tr").addClass("unassign");
           } catch (error) {
             console.error(error);
             alert("Transaction failed");
@@ -232,7 +240,8 @@
       $(this).parents("tr").find("td:nth-last-of-type(3)").each(function () {
         $(this).html('<textarea class="form-control" style="height:100px;background-color:white" >' + $(this).text() + '</textarea>');
       });
-      $(this).parents("tr").find("td").css("background-color", "#ffd9b3");
+      // $(this).parents("tr").css("background-color", "#ffd9b3");
+      $(this).parents("tr").addClass("assign");
       $(this).parents("tr").find(".post, .comment").toggle();
     });
 
@@ -273,6 +282,10 @@
       const comment = product.comment;
       const tree = product.tree;
       const newRow = document.createElement('tr');
+      if (!((retailer !== "0x0000000000000000000000000000000000000000" && retailerReceiveDate !== '0' && consumer === "0x0000000000000000000000000000000000000000" && account.toLowerCase() !== retailer.toLowerCase() && account.toLowerCase() !== distributor.toLowerCase() && account.toLowerCase() !== farmer.toLowerCase()) ||
+      (account.toLowerCase() === ownerAddress.toLowerCase() && consumer !== "0x0000000000000000000000000000000000000000" && comment === ""))){
+            newRow.classList.add("unassign");
+      }
       newRow.innerHTML = `
         <td>${farmer}</td>
         <td>${distributor}</td>

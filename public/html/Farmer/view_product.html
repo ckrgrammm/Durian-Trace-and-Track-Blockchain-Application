@@ -136,6 +136,9 @@
   table.table td .save {
     display: none;
   }
+  tr.unassign{
+    background-color: lightgrey;
+  }
 </style>
 
 <body>
@@ -364,6 +367,9 @@
       const tree = product.tree;
 
       const newRow = document.createElement('tr');
+      if (farmer.toLowerCase() !== ownerAddress.toLowerCase()){
+            newRow.classList.add("unassign");
+      }
       newRow.innerHTML = `
         <td>${farmer}</td>
         <td>${distributor}</td>

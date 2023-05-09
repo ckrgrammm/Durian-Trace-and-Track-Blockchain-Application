@@ -127,6 +127,9 @@
   table.table td .save {
     display: none;
   }
+  tr.unassign{
+    background-color: lightgrey;
+  }
 </style>
 
 <body>
@@ -298,6 +301,12 @@
       const comment = product.comment;
       const tree = product.tree;
       const newRow = document.createElement('tr');
+      if (!((distributor !== "0x0000000000000000000000000000000000000000"&&retailer==="0x0000000000000000000000000000000000000000"&& distReceiveDate !== '0') ||
+      (retailer.toLowerCase() === retailerAddresss.toLowerCase() && retailerReceiveDate === '0' )||
+      (retailer.toLowerCase() === ownerAddress.toLowerCase()))){
+            newRow.classList.add("unassign");
+      }
+
       newRow.innerHTML = `
         <td>${farmer}</td>
         <td>${distributor}</td>
